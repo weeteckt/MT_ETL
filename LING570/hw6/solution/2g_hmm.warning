@@ -1,0 +1,6 @@
+state_num=47
+sym_num=7905
+init_line_num=1
+trans_line_num=886
+emission_line_num=8738
+warning: the trans_prob_sum for state EOS is 0

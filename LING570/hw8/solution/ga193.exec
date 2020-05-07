@@ -1,0 +1,90 @@
+#!/usr/bin/env perl
+
+## created on 11/24/07
+
+## Purpose: get the feature line for a document 
+## 
+## The input is a document
+## The output is a line of the format
+##    instanceName targetLabel f1 v1 f2 v2 ...
+
+use strict;
+
+main();
+1;
+
+####### 
+sub main {
+    if(@ARGV != 3){
+	die "usage: $0 input_file targetlabel output_file\n";
+    }
+
+    my $input_file = $ARGV[0];
+    my $target_label = $ARGV[1];
+    my $output_file = $ARGV[2];
+
+    open(my $output_fp, ">$output_file") or 
+	die "cannot create $output_file\n";
+
+    my $lowercase = 1;
+
+    open(my $input_fp, "$input_file") or die "cannot open $input_file\n";
+
+    my $feat_line = get_feat_line($input_fp, $lowercase);
+
+    close($input_fp);
+    print $output_fp "$input_file $target_label $feat_line\n";
+    close($output_fp);
+}
+
+
+sub get_feat_line {
+    my ($input_fp, $lowercase) = @_;
+
+    my $start = 0;
+    
+    my %hash = ();
+    while(<$input_fp>){
+	chomp;
+	if(/^\s*$/){
+	    $start = 1;
+	    next;
+	}
+
+	if(!$start){
+	    next;
+	}
+
+	### replace non-letter with whitespace
+	s/\W/ /g;
+	s/\d/ /g;
+	s/\_/ /g;
+
+	s/^\s+//;
+	s/\s+$//;
+
+	tr/A-Z/a-z/;
+	
+	my @parts = split(/\s+/);
+	foreach my $part (@parts){
+	    if(defined($hash{$part})){
+		$hash{$part} ++;
+	    }else{
+		$hash{$part} = 1;
+	    }
+	}
+    }
+
+
+
+    my $str = "";
+    foreach my $key (sort keys %hash){
+	my $val = $hash{$key};
+	$str .= "$key $val ";
+    }
+
+    $str =~ s/\s+$//;
+    return $str;
+}
+	
+

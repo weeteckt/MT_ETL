@@ -1,0 +1,14 @@
+Input line 1: "a" "a" "b"
+	(6 states / 6 arcs reduce-> 5/5)
+Input line 2: "a" "a"
+	(5 states / 4 arcs reduce-> 4/3)
+Input line 3: "b"
+	(0 states / 0 arcs)
+Empty or invalid result of composition with transducer fsa2.
+Input line 4: "a" "b" "a"
+	(0 states / 0 arcs)
+Empty or invalid result of composition with transducer fsa2.
+Input line 5: "a" "c"
+	(0 states / 0 arcs)
+Empty or invalid result of composition with transducer fsa2.
+No lines of input provided.

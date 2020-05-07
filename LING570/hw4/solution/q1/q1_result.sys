@@ -1,0 +1,10 @@
+"c" "u" "t" => yes
+"c" "u" "t" "s" => yes
+"c" "u" "t" "e" "d" => no
+"c" "u" "t" "i" "n" "g" => yes
+"c" "u" "t" "t" "i" "n" "g" => no
+"s" "p" "e" "a" "k" "s" => yes
+"s" "p" "e" "a" "k" "i" "n" "g" => yes
+"s" "p" "o" "k" "e" => yes
+"s" "p" "e" "a" "k" => yes
+"s" "p" "e" "a" "k" "e" "d" => no

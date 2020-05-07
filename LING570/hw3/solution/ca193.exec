@@ -1,0 +1,88 @@
+#!/usr/bin/perl
+
+# created on 5/5/06, modified on 10/12/09
+# purpose: create a word-tag voc from stdin.
+# 
+# input: w1/t1 w2/t2 ....
+#
+#
+# output: each line has the format "word tag word_freq P(t|w)"
+#
+# The lines are sorted by word freq.
+# If a word has multiple tags, the entries are then sorted by P(t|w).
+#
+# Note: we will not ignore input lines that start with "#"
+
+# to run:
+#    cat input | $0 > voc_file
+
+use strict;
+
+main();
+
+1;
+
+sub main {
+    my %word_cnt = ();
+    my %word_tag = ();
+
+    my $word_num = 0;
+    my $token_num = 0;
+
+    ### step 1: collect counts
+    while (<STDIN>) {
+	chomp;
+	next if (/^\s*$/);
+	s/^\s+//;
+	s/\s+$//;
+	my @parts = split(/\s+/);
+	foreach my $pair (@parts) {
+	    if($pair =~ /^(.+)\/([^\/]+)$/){
+		my $w = $1;
+		my $t = $2;
+		$word_cnt{$w}++;
+		my $pt = $word_tag{$w};
+		if(!defined($pt)){
+		    $word_tag{$w} = {};
+		    $pt = $word_tag{$w};
+		}
+
+		if(defined($pt->{$t})){
+		    $pt->{$t} ++;
+		}else{
+		    $pt->{$t} = 1;
+		}
+		
+	    }else{
+		die "wrong format: +$pair+\n";
+	    }
+	}
+    }
+
+    #### step 2: print out the results
+    foreach my $w (sort {$word_cnt{$b} <=> $word_cnt{$a}} keys %word_cnt) {
+	my $pt = $word_tag{$w};
+	my $total_cnt = $word_cnt{$w};
+	
+	if(!defined($pt)){
+	    print STDERR "This should never happen: $w is not defined in word_tag\n";
+	    next;
+	}else{
+	    ## print "$w\t$total_cnt\t";
+	}
+	
+	foreach my $tag (sort {$pt->{$b} <=> $pt->{$a}} keys %$pt){
+	    my $cnt = $pt->{$tag};
+	    my $prec = $cnt / $total_cnt;
+	    $prec =~ s/(\.\d{5})(\d+)$/$1/;
+	    my $res = "$w\t$tag\t$prec\t$cnt";
+	    print "$res\n";
+	}
+
+	## print "\n";
+	$word_num ++;
+	$token_num += $total_cnt;
+    }
+    
+    print STDERR "All done: voc_size=$word_num, token_num=$token_num\n";
+}

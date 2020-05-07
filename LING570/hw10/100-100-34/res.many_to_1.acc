@@ -1,0 +1,5 @@
+Many-to-One Mapping
+Gold_Cluster: gold.100 cluster_Num=34
+Sys_Cluster: 100-100-34/sys_cluster cluster_Num=34
+Total_Token_Num=100 Match=67
+Acc=0.67

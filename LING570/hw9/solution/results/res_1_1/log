@@ -1,0 +1,89 @@
+
+
+***************cat examples/wsj_sec0.word_pos | make_voc_from_wordtag.pl 1 0 > res_1_1/train_voc
+
+Success! voc_size=7903, token_num=46451
++++++cat examples/wsj_sec0.word_pos | make_voc_from_wordtag.pl 1 0 > res_1_1/train_voc++++ succeeds
+
+
+
+
+***************fa194.exec examples/wsj_sec0.word_pos res_1_1/train.vectors.txt res_1_1/train_voc 1 > res_1_1/fa_train.log 2>&1
+
++++++fa194.exec examples/wsj_sec0.word_pos res_1_1/train.vectors.txt res_1_1/train_voc 1 > res_1_1/fa_train.log 2>&1++++ succeeds
+
+
+
+
+***************fa194.exec examples/test.word_pos res_1_1/test.vectors.txt res_1_1/train_voc 1 > res_1_1/fa_test.log 2>&1
+
++++++fa194.exec examples/test.word_pos res_1_1/test.vectors.txt res_1_1/train_voc 1 > res_1_1/fa_test.log 2>&1++++ succeeds
+
+
+
+
+***************cat res_1_1/train.vectors.txt.feat | fb194.exec 1 > res_1_1/kept_feats
+
+thres=1
+Out of 39380 features, 39380 are kept
++++++cat res_1_1/train.vectors.txt.feat | fb194.exec 1 > res_1_1/kept_feats++++ succeeds
+
+
+
+
+***************cat res_1_1/train.vectors.txt | filter_feat.pl res_1_1/kept_feats | fc194.exec > res_1_1/final_train.vectors.txt
+
+topN = 0
+39380 features read from res_1_1/kept_feats
+total_feat_cnt=325157, kept_feat_cnt=325157
+Finish processing 46451 instances from the input
+instance_w_no_feature=0
++++++cat res_1_1/train.vectors.txt | filter_feat.pl res_1_1/kept_feats | fc194.exec > res_1_1/final_train.vectors.txt++++ succeeds
+
+
+
+
+***************cat res_1_1/test.vectors.txt | filter_feat.pl res_1_1/kept_feats | fc194.exec > res_1_1/final_test.vectors.txt
+
+topN = 0
+39380 features read from res_1_1/kept_feats
+total_feat_cnt=20459, kept_feat_cnt=15487
+Finish processing 2449 instances from the input
+instance_w_no_feature=0
++++++cat res_1_1/test.vectors.txt | filter_feat.pl res_1_1/kept_feats | fc194.exec > res_1_1/final_test.vectors.txt++++ succeeds
+
+
+
+
+***************info2vectors -Xmx1000m --input res_1_1/final_train.vectors.txt  --output res_1_1/train.vectors
+
+Logging configuration class "edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator" failed
+java.lang.ClassNotFoundException: edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator
++++++info2vectors -Xmx1000m --input res_1_1/final_train.vectors.txt  --output res_1_1/train.vectors++++ succeeds
+
+
+
+
+***************info2vectors -Xmx1000m --input res_1_1/final_test.vectors.txt  --output res_1_1/test.vectors --use-pipe-from res_1_1/train.vectors
+
+Logging configuration class "edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator" failed
+java.lang.ClassNotFoundException: edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator
+ output usepipe ilist pipe instance id =c22b1566609b2a13:455f9e88:124e7400e02:-7ffc
++++++info2vectors -Xmx1000m --input res_1_1/final_test.vectors.txt  --output res_1_1/test.vectors --use-pipe-from res_1_1/train.vectors++++ succeeds
+
+
+
+
+***************vectors2train -Xmx2000m --training-file res_1_1/train.vectors --trainer MaxEnt --output-classifier res_1_1/model --report train:accuracy train:confusion > res_1_1/model.stdout 2>res_1_1/model.stderr
+
++++++vectors2train -Xmx2000m --training-file res_1_1/train.vectors --trainer MaxEnt --output-classifier res_1_1/model --report train:accuracy train:confusion > res_1_1/model.stdout 2>res_1_1/model.stderr++++ succeeds
+
+
+
+
+***************classify --testing-file res_1_1/test.vectors --classifier res_1_1/model --report test:accuracy test:confusion test:raw > res_1_1/model_test.stdout 2>res_1_1/model_test.stderr
+
++++++classify --testing-file res_1_1/test.vectors --classifier res_1_1/model --report test:accuracy test:confusion test:raw > res_1_1/model_test.stdout 2>res_1_1/model_test.stderr++++ succeeds
+
+
+All done. Results are under res_1_1

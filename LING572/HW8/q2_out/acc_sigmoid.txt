@@ -1,0 +1,2 @@
+
+sigmoid function accuracy: 40.5%

@@ -1,0 +1,30 @@
+Logging configuration class "edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator" failed
+java.lang.ClassNotFoundException: edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator
+Training vectors loaded from /home2/weeteckt/dropbox/09-10/570/hw8/examples/train.vectors
+Testing vectors loaded from /home2/weeteckt/dropbox/09-10/570/hw8/examples/test.vectors
+Splitting feature "israel" infogain=0.1679320712758905
+child0=2363 child1=337
+Splitting feature "lo" infogain=0.045020499540307346
+child0=334 child1=3
+Splitting feature "you" infogain=0.2516291673878229
+child0=1 child1=2
+Splitting feature "repeated" infogain=0.03477000072391606
+child0=326 child1=8
+Splitting feature "just" infogain=0.8112781244591328
+child0=2 child1=6
+Splitting feature "signature" infogain=0.0306420568948364
+child0=322 child1=4
+Splitting feature "turkish" infogain=0.1629534691102641
+child0=2159 child1=204
+Splitting feature "arromdee" infogain=0.062256448778396395
+child0=191 child1=13
+Splitting feature "c" infogain=0.1920058354921067
+child0=10 child1=3
+Splitting feature "liberal" infogain=0.030215853791159028
+child0=190 child1=1
+Splitting feature "gun" infogain=0.11107899472749483
+child0=1820 child1=339
+Splitting feature "homeland" infogain=0.052174468274142405
+child0=337 child1=2
+Splitting feature "clayton" infogain=0.08284907810894948
+child0=1697 child1=123

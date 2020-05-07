@@ -1,0 +1,106 @@
+#!/usr/bin/env perl
+
+### Purpose: For Q3 of hw4, take x and y as input and output x/y as output
+### created on 10/16/09
+
+### usage: $0 x_file y_file > output
+### x_file: one string per line
+### y_file: "y_string prob" per line 
+### 
+### output_file has the format: x => x1/y1 x2/y2 ... prob
+
+my $EMPTY_STR = "*e*";
+
+use strict;
+
+main();
+
+1;
+
+sub main {
+    if(@ARGV != 2){
+	die "usage: $0 x_file y_file > output\n";
+    }
+
+    my $x_file = $ARGV[0];
+    my $y_file = $ARGV[1];
+
+    my @x_arr = ();
+    my $x_num = read_file($x_file, \@x_arr);
+    
+    my @y_arr = ();
+    my $y_num = read_file($y_file, \@y_arr);
+
+    if($x_num != $y_num){
+	die "diff numbers of lines: $x_num != $y_num\n";
+    }else{
+	print STDERR "line_num=$x_num\n";
+    }
+
+    for(my $i=0; $i<$x_num; $i++){
+	my $x_str = $x_arr[$i];
+	my $y_str = $y_arr[$i];
+
+	proc_line($x_str, $y_str);
+    }
+}
+
+#### return success
+sub proc_line {
+    my ($x, $y) = @_;
+
+    print "$x => ";
+
+    if($y =~ /^0$/){
+	print "*NONE*\n";
+	return 1;
+    }
+    
+    my @chars = split(//, $x);
+
+    my @parts = split(/\s+/, $y);
+    
+    pop(@parts);   # remove prob at the end
+    
+    my $prev_ptr = 0;
+    my $cur_ptr = 0;
+
+    my @res_arr = ();
+
+    for my $part (@parts){
+	if($part eq $EMPTY_STR){
+	    $cur_ptr ++;
+	}else{
+	    my $cur_x = join("", @chars[$prev_ptr..$cur_ptr-1]);
+
+	    $part =~ s/^\"//;
+	    $part =~ s/\"$//;
+	    push(@res_arr, "$cur_x/$part");
+	    $prev_ptr = $cur_ptr;
+	}    
+    }
+    
+    print join(" ", @res_arr), "\n";
+    return 1;
+}
+
+
+## return the number of lines
+sub read_file {
+    my ($file_name, $arr) = @_;
+
+    open(my $fp, "$file_name") or die "cannot open $file_name\n";
+
+    while(<$fp>){
+	chomp;
+	if(/^\s*$/){
+	    next;
+	}
+	
+	s/^\s*//;
+	s/\s*$//;
+	push(@$arr, $_);
+    }
+
+    return scalar @$arr;
+}

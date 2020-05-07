@@ -1,0 +1,324 @@
+Logging configuration class "edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator" failed
+java.lang.ClassNotFoundException: edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator
+Training vectors loaded from train.vectors
+Testing vectors loaded from test.vectors
+Splitting feature "israel" infogain=0.1783630791430595
+child0=2350 child1=350
+Splitting feature "lo" infogain=0.04358930304293873
+child0=347 child1=3
+Splitting feature "an" infogain=0.2516291673878229
+child0=1 child1=2
+Splitting feature "jack" infogain=0.03607394162443639
+child0=331 child1=16
+Splitting feature "has" infogain=0.2710382325345575
+child0=11 child1=5
+Splitting feature "are" infogain=0.1831497988820474
+child0=2 child1=9
+Splitting feature "about" infogain=0.10218717094933327
+child0=1 child1=8
+Splitting feature "repeated" infogain=0.034599574162548496
+child0=323 child1=8
+Splitting feature "can" infogain=0.8112781244591328
+child0=2 child1=6
+Splitting feature "amendment" infogain=0.031119792351704867
+child0=318 child1=5
+Splitting feature "me" infogain=0.41997309402197514
+child0=3 child1=2
+Splitting feature "any" infogain=0.2516291673878229
+child0=1 child1=2
+Splitting feature "vm" infogain=0.029462632797914348
+child0=302 child1=16
+Splitting feature "most" infogain=0.20443400292496483
+child0=6 child1=10
+Splitting feature "wish" infogain=0.17095059445466876
+child0=8 child1=2
+Splitting feature "temporary" infogain=0.02823499298630444
+child0=298 child1=4
+Splitting feature "editorials" infogain=0.0231696399923935
+child0=297 child1=1
+Splitting feature "ormer" infogain=0.0190554651605672
+child0=295 child1=2
+Splitting feature "hearts" infogain=0.02335569718461166
+child0=292 child1=3
+Splitting feature "about" infogain=0.2516291673878229
+child0=2 child1=1
+Splitting feature "turkish" infogain=0.15628750790170454
+child0=2161 child1=189
+Splitting feature "mar" infogain=0.09244880015864897
+child0=174 child1=15
+Splitting feature "again" infogain=0.17095059445466876
+child0=12 child1=3
+Splitting feature "liberal" infogain=0.03954876377313417
+child0=173 child1=1
+Splitting feature "acuner" infogain=0.05128985879995682
+child0=172 child1=1
+Splitting feature "gun" infogain=0.11688062473019811
+child0=1815 child1=346
+Splitting feature "homeland" infogain=0.07184469497938906
+child0=343 child1=3
+Splitting feature "hallam" infogain=0.05782998642558934
+child0=325 child1=18
+Splitting feature "lot" infogain=0.42574379330261575
+child0=12 child1=6
+Splitting feature "individual" infogain=0.3166890883150208
+child0=4 child1=2
+Splitting feature "rate" infogain=0.24715018363696709
+child0=10 child1=2
+Splitting feature "government" infogain=0.04692523308961641
+child0=229 child1=96
+Splitting feature "capital" infogain=0.11061052655489578
+child0=91 child1=5
+Splitting feature "misc" infogain=0.07767809958869332
+child0=88 child1=3
+Splitting feature "arms" infogain=0.11360156613370032
+child0=60 child1=28
+Splitting feature "constitution" infogain=0.1573072340219912
+child0=49 child1=11
+Splitting feature "then" infogain=0.8453509366224365
+child0=3 child1=8
+Splitting feature "save" infogain=0.11366148182781988
+child0=45 child1=4
+Splitting feature "an" infogain=0.31127812445913283
+child0=2 child1=2
+Splitting feature "trained" infogain=0.14079986239983278
+child0=40 child1=5
+Splitting feature "about" infogain=0.17095059445466876
+child0=1 child1=4
+Splitting feature "came" infogain=0.1650281328091226
+child0=35 child1=5
+Splitting feature "me" infogain=0.9709505944546688
+child0=2 child1=3
+Splitting feature "entirely" infogain=0.05488209984529069
+child0=226 child1=3
+Splitting feature "crack" infogain=0.0397722131544232
+child0=224 child1=2
+Splitting feature "thread" infogain=0.044314821221824535
+child0=219 child1=5
+Splitting feature "about" infogain=0.41997309402197514
+child0=2 child1=3
+Splitting feature "an" infogain=0.2516291673878229
+child0=2 child1=1
+Splitting feature "gen" infogain=0.03736981889567151
+child0=216 child1=3
+Splitting feature "about" infogain=0.2516291673878229
+child0=2 child1=1
+Splitting feature "he" infogain=0.03024302951735784
+child0=145 child1=71
+Splitting feature "from" infogain=0.093007487388749
+child0=24 child1=47
+Splitting feature "shown" infogain=0.24715018363696684
+child0=22 child1=2
+Splitting feature "response" infogain=0.31427482773226484
+child0=19 child1=3
+Splitting feature "again" infogain=0.2516291673878229
+child0=1 child1=2
+Splitting feature "fbi" infogain=0.07644879758289203
+child0=1544 child1=271
+Splitting feature "months" infogain=0.09358322280007614
+child0=240 child1=31
+Splitting feature "hand" infogain=0.3770434857823402
+child0=27 child1=4
+Splitting feature "must" infogain=0.23279843755724194
+child0=23 child1=4
+Splitting feature "article" infogain=1.0
+child0=2 child1=2
+Splitting feature "disclaimer" infogain=0.10101752240215489
+child0=216 child1=24
+Splitting feature "got" infogain=0.22230714724780343
+child0=17 child1=7
+Splitting feature "people" infogain=0.5216406363433186
+child0=3 child1=4
+Splitting feature "again" infogain=0.8112781244591328
+child0=3 child1=1
+Splitting feature "likely" infogain=0.2051099000738689
+child0=15 child1=2
+Splitting feature "arab" infogain=0.08613817052881279
+child0=212 child1=4
+Splitting feature "again" infogain=0.8112781244591328
+child0=3 child1=1
+Splitting feature "epic" infogain=0.05593960954577337
+child0=207 child1=5
+Splitting feature "jim" infogain=0.0636785608613365
+child0=168 child1=39
+Splitting feature "place" infogain=0.0727868608586344
+child0=134 child1=34
+Splitting feature "ny" infogain=0.1914332548141935
+child0=33 child1=1
+Splitting feature "death" infogain=0.17917624018867628
+child0=28 child1=5
+Splitting feature "another" infogain=0.21715061898103383
+child0=19 child1=9
+Splitting feature "most" infogain=0.45810589515712374
+child0=6 child1=3
+Splitting feature "next" infogain=0.9182958340544896
+child0=2 child1=1
+Splitting feature "were" infogain=0.29272427884960495
+child0=4 child1=15
+Splitting feature "latter" infogain=0.35335933502142136
+child0=14 child1=1
+Splitting feature "about" infogain=0.8112781244591328
+child0=3 child1=1
+Splitting feature "lance" infogain=0.08133798689241423
+child0=130 child1=4
+Splitting feature "statutes" infogain=0.0924220324273417
+child0=126 child1=4
+Splitting feature "buffalo" infogain=0.0554127916301978
+child0=119 child1=7
+Splitting feature "by" infogain=0.12808527889139454
+child0=1 child1=6
+Splitting feature "o" infogain=0.062448409189187704
+child0=117 child1=2
+Splitting feature "if" infogain=0.08455304843827044
+child0=52 child1=65
+Splitting feature "their" infogain=0.17413637456901804
+child0=26 child1=26
+Splitting feature "responsible" infogain=0.22227492910745839
+child0=23 child1=3
+Splitting feature "assume" infogain=0.2151524408123472
+child0=21 child1=2
+Splitting feature "larry" infogain=0.1951647201599787
+child0=18 child1=3
+Splitting feature "and" infogain=0.9182958340544896
+child0=1 child1=2
+Splitting feature "anybody" infogain=0.3095434291503252
+child0=17 child1=1
+Splitting feature "clayton" infogain=0.0790963196515242
+child0=1436 child1=108
+Splitting feature "israeli" infogain=0.07750123717283675
+child0=1370 child1=66
+Splitting feature "king" infogain=0.09426205367196241
+child0=62 child1=4
+Splitting feature "age" infogain=0.08685796213951934
+child0=60 child1=2
+Splitting feature "muslims" infogain=0.07848420997809735
+child0=1317 child1=53
+Splitting feature "dangerous" infogain=0.09730035374552384
+child0=51 child1=2
+Splitting feature "sw" infogain=0.06577273907999559
+child0=1258 child1=59
+Splitting feature "part" infogain=0.13129586665567827
+child0=54 child1=5
+Splitting feature "has" infogain=0.9709505944546688
+child0=3 child1=2
+Splitting feature "waco" infogain=0.057626484243739506
+child0=1174 child1=84
+Splitting feature "immediately" infogain=0.13239025528339599
+child0=79 child1=5
+Splitting feature "due" infogain=0.13022362265420973
+child0=75 child1=4
+Splitting feature "latter" infogain=0.11830738504445726
+child0=72 child1=3
+Splitting feature "on" infogain=0.10326130553086432
+child0=26 child1=46
+Splitting feature "economic" infogain=0.15109697051711368
+child0=45 child1=1
+Splitting feature "disclaimer" infogain=0.2506932010751488
+child0=23 child1=3
+Splitting feature "we" infogain=0.1874674880534477
+child0=11 child1=12
+Splitting feature "it" infogain=0.31668908831502096
+child0=2 child1=10
+Splitting feature "absurd" infogain=0.3219280948873623
+child0=6 child1=4
+Splitting feature "pay" infogain=0.057945826936858014
+child0=1062 child1=112
+Splitting feature "one" infogain=0.11550690711467576
+child0=40 child1=72
+Splitting feature "attacks" infogain=0.10559103637519526
+child0=71 child1=1
+Splitting feature "federal" infogain=0.34742601632129166
+child0=33 child1=7
+Splitting feature "about" infogain=0.5916727785823274
+child0=6 child1=1
+Splitting feature "period" infogain=0.3298460702071465
+child0=31 child1=2
+Splitting feature "in" infogain=0.20559250818508304
+child0=1 child1=30
+Splitting feature "jews" infogain=0.05326597643730535
+child0=996 child1=66
+Splitting feature "cult" infogain=0.3207737659867179
+child0=57 child1=9
+Splitting feature "any" infogain=0.31976006206417584
+child0=4 child1=5
+Splitting feature "themselves" infogain=0.15760027685516426
+child0=48 child1=9
+Splitting feature "any" infogain=0.5577277787393193
+child0=6 child1=3
+Splitting feature "choice" infogain=0.37744375108173434
+child0=4 child1=2
+Splitting feature "as" infogain=0.31127812445913283
+child0=2 child1=2
+Splitting feature "qk" infogain=0.13576328293039397
+child0=45 child1=3
+Splitting feature "a" infogain=0.2516291673878229
+child0=1 child1=2
+Splitting feature "status" infogain=0.10929773588431746
+child0=43 child1=2
+Splitting feature "beyer" infogain=0.04035691533216035
+child0=978 child1=18
+Splitting feature "arab" infogain=0.040374607186170364
+child0=952 child1=26
+Splitting feature "t" infogain=0.19555334819207626
+child0=14 child1=12
+Splitting feature "with" infogain=0.3435794213678427
+child0=7 child1=5
+Splitting feature "about" infogain=0.12808527889139454
+child0=6 child1=1
+Splitting feature "guns" infogain=0.0395569437577008
+child0=888 child1=64
+Splitting feature "above" infogain=0.30462329286192036
+child0=55 child1=9
+Splitting feature "warrant" infogain=0.27732090440253154
+child0=50 child1=5
+Splitting feature "watch" infogain=0.17738993912568418
+child0=48 child1=2
+Splitting feature "an" infogain=1.0
+child0=1 child1=1
+Splitting feature "after" infogain=0.1536877959439529
+child0=38 child1=10
+Splitting feature "crime" infogain=0.44643934467101554
+child0=8 child1=2
+Splitting feature "has" infogain=0.2935644431995964
+child0=6 child1=2
+Splitting feature "kaldis" infogain=0.031412906410325014
+child0=859 child1=29
+Splitting feature "arms" infogain=0.03121778562236699
+child0=818 child1=41
+Splitting feature "difference" infogain=0.470318566046672
+child0=34 child1=7
+Splitting feature "com" infogain=0.30595849286804166
+child0=5 child1=2
+Splitting feature "name" infogain=0.2203384615638032
+child0=30 child1=4
+Splitting feature "a" infogain=0.31127812445913294
+child0=3 child1=1
+Splitting feature "liberal" infogain=0.1441756336518655
+child0=29 child1=1
+Splitting feature "new" infogain=0.21639693245126468
+child0=28 child1=1
+Splitting feature "we" infogain=0.033634647919658534
+child0=533 child1=285
+Splitting feature "iran" infogain=0.04363364040248241
+child0=277 child1=8
+Splitting feature "use" infogain=0.31127812445913283
+child0=4 child1=4
+Splitting feature "using" infogain=0.046735396150360264
+child0=242 child1=35
+Splitting feature "in" infogain=0.13003339973035105
+child0=1 child1=34
+Splitting feature "turks" infogain=0.048821151541454055
+child0=238 child1=4
+Splitting feature "weapons" infogain=0.056280075594391965
+child0=504 child1=29
+Splitting feature "d" infogain=0.27492592707267716
+child0=25 child1=4
+Splitting feature "c" infogain=1.0
+child0=2 child1=2
+Splitting feature "next" infogain=0.2422921890824148
+child0=24 child1=1
+Splitting feature "fact" infogain=0.04774710623335032
+child0=464 child1=40
+Splitting feature "dan" infogain=0.29658066978328723
+child0=36 child1=4
+Splitting feature "compound" infogain=0.04305586852398302
+child0=448 child1=16

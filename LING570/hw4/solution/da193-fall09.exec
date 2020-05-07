@@ -1,0 +1,32 @@
+#!/usr/bin/env perl
+
+### Purpose: 
+### created on 
+
+use strict;
+
+main();
+
+1;
+
+sub main {
+    while(<STDIN>){
+	chomp;
+	if(/^\s*$/){
+	    print "$_\n";
+	}
+
+	if(/^(.+)\s*\=\>\s*(yes|no)\s*$/){
+	    my $str1 = $1;
+	    my $res = $2;
+
+	    $str1 =~ s/\"//g;
+	    $str1 =~ s/\s+//g;
+
+	    print "$str1 => $res\n";
+	    next;
+	}
+
+	print STDERR "wrong format: +$_+\n";
+    }
+}

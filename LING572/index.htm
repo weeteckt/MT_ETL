@@ -1,0 +1,244 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.73 [en] (X11; U; Linux 2.2.12-20 i686) [Netscape]">
+   <title>AIxploratorium - Decision Trees</title>
+<style type="text/css">
+<!--
+P { text-align: justify }
+-->
+</style>
+
+<script language="JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#FF0000" alink="#000088">
+
+<!-- begin standard header -->
+
+<center>
+<table BORDER=0 WIDTH="760" >
+<tr>
+<td ALIGN=LEFT WIDTH="20%"><img SRC="../../graphics/aaai-logo.gif" ></td>
+
+<td ALIGN=CENTER WIDTH="60%">
+<h1>
+<font size=+4>AIxploratorium<br>
+</font><font size=+2>Decision Trees</font></h1>
+</td>
+
+<td ALIGN=RIGHT WIDTH="20%"><img SRC="../../graphics/uofa-logo.gif" ></td>
+</tr>
+
+
+<tr>
+<td COLSPAN="3">
+<hr></td>
+</tr>
+</table>
+
+<!-- end standard header -->
+
+<!-- begin standard layout -->
+
+<table BORDER=0 WIDTH="760" >
+<tr>
+<td WIDTH="5%">&nbsp;</td>
+
+<td WIDTH="90%">
+
+<!-- add page text/images here -->
+<h1>
+Decision Trees, for Fun and Profit...
+</h1>
+
+<li>
+<b><font color="#AC0E0B">
+Note: You should have Java and Javascript enabled in your browser
+to view these pages.  The Decision Tree Java applet is written using
+Java 1.2, and your browser needs a plug-in to load it...
+which can be downloaded from <a href="http://java.sun.com/products/plugin/">here</a>.</font></b></li>
+
+<p><br><b><font size=+2><a href="InterArticle/1-DecisionTree.html">Wanna
+hear the story :</a></font></b>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul><img SRC="InterArticle/graphics/dopeybasketballguy.gif"  align=RIGHT></ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+<i>You are in the office pool, currently betting on the outcome of the
+basketball game next week, between the <b>MallRats</b> and the <b>Chinooks</b>.
+You have to decide which team will win, then bet on that team. Of course,
+you could just guess, or flip a coin. Here we present a way that (typically)
+will do better: by using observations about the past performance of the
+teams.</i></ul>
+
+<b><font color="#FF0000" size="+2">Topics</font></b> <br>
+        <form name="form1">
+          <select name="menu1" onChange="MM_jumpMenu('parent',this,1)" size="1">
+            <option selected>Choose One...</option>
+            <option value="InterArticle/1-DecisionTree.html">Introduction: Who will win the game?</option>
+            <option value="InterArticle/2-DecisionTree.html">Using Decision Trees</option>
+            <option value="InterArticle/3-DecisionTree.html">Random Splits</option>
+            <option value="InterArticle/4-DecisionTree.html">Information Gain</option>
+            <option value="InterArticle/5-DecisionTree.html">Gain Ratio</option>
+            <option value="InterArticle/6-DecisionTree.html">Evaluation Process 
+            + Cross Validation</option>
+            <option value="InterArticle/7-DecisionTree.html">Overfitting</option>
+            <option value="InterArticle/8-DecisionTree.html">Pruning</option>
+            <option value="InterArticle/9-DecisionTree.html">Issues</option>
+            <option value="InterArticle/Notation.html">Notation, terms</option>
+          </select>
+        </form>
+
+<!--
+<table BORDER=0 >
+<tr>
+<td>
+<ul>
+<li>
+<b><font size=-1><a href="InterArticle/1-DecisionTree.html">Introduction:
+Who will win the game...</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/2-DecisionTree.html">Using Decision
+Trees&nbsp;</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/3-DecisionTree.html">Random Splits</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/4-DecisionTree.html">Information
+Gain</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/5-DecisionTree.html">Gain Ratio</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/6-DecisionTree.html">Evaluation
+Process + Cross Validation</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/7-DecisionTree.html">Overfitting</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/8-DecisionTree.html">Pruning</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/9-DecisionTree.html">Issues</a></font></b></li>
+
+<li>
+<b><font size=-1><a href="InterArticle/Notation.html">Notation, terms</a></font></b></li>
+</ul>
+
+</td>
+
+</table>
+-->
+
+<li>
+<b><font size=+2><a href="Applet/DecisionTreeApplet.html">Wanna just go
+to the applet and play?&nbsp;&nbsp;</font></b>
+<img SRC="InterArticle/graphics/frolicking.gif" border="0"></a></li>
+
+<ul>
+<li>
+<b><a href="InterArticle/DecisionTreeDoc.html">Documentation for the applet</a></b></li>
+
+<br>&nbsp;</ul>
+</ul>
+<img src="InterArticle/graphics/nerd.gif" align=LEFT><font size=+1><b><a href="InterArticle/LearnGenl.html">Skip
+the cute demo -- I want to see the scholarly summaries, pointers, homework
+questions, etc</a></b>.&nbsp;</font>
+
+<p>
+<font size=+1><b><a href="dta_source_dl.html">Download the Decision Tree Applet source code...</a></b></font>
+<br>
+<i>(Updated January 2003)</i>
+<br>&nbsp;
+<br>&nbsp;
+<p>
+
+<hr WIDTH="100%">
+<ul>
+<li>
+<b>We are eager to hear feedback from people using this system! Please
+contact</b></li>
+
+<table NOSAVE >
+<tr>
+<td><img SRC="../../graphics/mailbox1.gif" ALT="Email"></td>
+
+<td><a href="http://www.cs.ualberta.ca/~greiner/">Russell Greiner</a></td>
+
+<td><a href="mailto:greiner@cs.ualberta.ca">greiner@cs.ualberta.ca</a></td>
+
+<td>(780) 492-5461</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td><a href="http://www.cs.ualberta.ca/~jonathan">Jonathan Schaeffer&nbsp;</a></td>
+
+<td><a href="mailto:jonathan@cs.ualberta.ca">jonathan@cs.ualberta.ca</a></td>
+
+<td>(780) 492-3851</td>
+</tr>
+</table>
+
+<p><ul><b>Dep't of Computing Science</b>
+<br><b>University of Alberta</b>
+<br><b>Edmonton, AB T6G 2H1 Canada</b>
+<br><b>FAX: (780) 492-1071</b></ul>
+</ul>
+
+<!-- end page text/images -->
+</td>
+<tr>
+<td WIDTH="5%">&nbsp;</td>
+</tr>
+
+<!-- begin navigation bar -->
+<tr>
+<td></td>
+
+<td>
+<hr>
+<center>
+<a href="http://www.cs.ualberta.ca/~aixplore">
+<img SRC="../../graphics/arrow_blue_up.gif" ALT="AIxploratorium" border="0"></a>
+<a href="InterArticle/1-DecisionTree.html">
+<img SRC="../../graphics/arrow_blue_right.gif" ALT="Who will win thegame?" border="0"></a>
+</center>
+</td>
+
+<td></td>
+<!-- end navigation bar -->
+
+<!-- begin standard footer -->
+
+<td WIDTH="5%">&nbsp;</td>
+</tr>
+</table>
+</center>
+
+<!-- end standard footer -->
+
+</body>
+</html>

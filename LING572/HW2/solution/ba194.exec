@@ -1,0 +1,59 @@
+#!/usr/bin/env perl
+
+
+## created on 12/27/07
+
+## Purpose: binarize a feature vector file
+
+## to run:
+##    cat input_file | $0  > output_file
+
+## the format of the input and output file is:
+##  instanceName label f1 v1 f2 v2 ....
+
+
+use strict;
+
+main();
+
+1;
+
+
+#########################
+sub main {
+    my $cnt = 0;
+
+    while(<STDIN>){
+	chomp;
+	if(/^\s*$/){
+	    next;
+	}
+
+	my @parts = split(/\s+/);
+	my $part_num = scalar @parts;
+
+	if(scalar @parts < 2 || ($part_num % 2 != 0)){
+	    print STDERR "wrong format +$_+\n";
+	    next;
+	}
+
+	my $res = "";
+	for(my $i=0; $i<$part_num; $i+=2){
+	    if($i == 0){
+		$res = $parts[0] . " " . $parts[1];
+		next;
+	    }
+
+	    my $val = $parts[$i+1];
+	    if($val > 0){
+		$res .= " $parts[$i] 1";
+	    }
+	}
+
+	print "$res\n";
+
+	$cnt ++;
+    }
+
+    print STDERR "valid_line=$cnt\n";
+}

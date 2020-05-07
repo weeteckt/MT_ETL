@@ -1,0 +1,7 @@
+leng mismatch:
+ num=37: +Influential/JJ members/NNS of/IN the/DT House/NNP Ways/NNP and/CC Means/NNP Committee/NNP introduced/VBD legislation/NN that/WDT would/MD restrict/VB how/WRB the/DT new/JJ savings-and-loan/NN bailout/NN agency/NN can/MD raise/VB capital/NN ,/, creating/VBG another/DT potential/JJ obstacle/NN to/TO the/DT government/NN 's/POS sale/NN of/IN sick/JJ thrifts/NNS ./.+
+ num=36: +Influential/NNS members/IN of/DT the/NNP House/NNP Ways/IN and/IN Means/NNP Committee/VBN introduced/NN legislation/IN that/MD would/MD restrict/WRB how/DT the/JJ new/JJ savings-and-loan/JJ bailout/NN agency/NN can/VB raise/NN capital/, ,/VBG creating/DT another/JJ potential/JJ obstacle/IN to/DT the/NN government/VBZ 's/NN sale/IN of/IN sick/NNS thrifts/.+
+sent_num: counted_sent=99 untagged=0 (0%), leng_mismatch=1 wrong_format=0
+
+word_num: gold=2449, counted=2412, matched=1675
+accuracy: overall=68.3952633728052%, among_counted=69.4444444444444% untagged=0%

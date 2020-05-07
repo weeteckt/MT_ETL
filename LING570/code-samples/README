@@ -1,0 +1,47 @@
+The subdirectories of this directory contain examples of simple programs written
+in C++, Java, Perl, Python, and Ruby along with UNIX shell scripts that
+standardize the way these programs are executed. These programs implement basic
+functionality in their respective languages, exhibit good coding style, and
+demonstrate easy ways to implement features such as online documentation and
+command line processing. They are intended to serve as templates from which you
+can write the programs you turn in as homework.
+
+In each example, the program is called ncat. It reads lines from standard input
+and prints them to standard out. The program takes a single integer argument
+which specifies the maximum number of lines to print. If the argument is omitted,
+the program runs until all of standard input has been printed.
+
+Each program is accompanied by a UNIX shell script called ncat.sh which runs the
+actual program. This is done to standardize the way the various programs are
+called, making it easier for the grader to run programs written in many different
+languages.
+
+The simplest environments are found with the scripting languages Perl, Python,
+and Ruby. The directories for each of these languages contains a single script
+written in that language. The ncat.sh script simply passes the arguments along to
+that script. All three of these languages also provide libraries that make it
+easy to add processing of optional command line switches and online help text.
+This is provided by the optparse module in Python, the OptionParser class in
+Ruby, and the Getopt::Long and Pod::Usage modules in Perl. Run "./ncat.sh --help"
+in Perl, Ruby, or Python, or "./ncat.sh --man" in Perl to see this functionality
+in action.
+
+The C++ example consists of a source file called ncat.cpp and a Makefile which
+contains instructions for building the program. Here the ncat.sh uses the make
+utility to build ncat before running it.
+
+The Java example, like the C++ example, must be built before it can be run. The
+build.xml file contains instructions for building the program. Here the ncat.sh
+script calls the Java ant utility to build ncat before running it. The compiled
+Java files are written to "build" subdirectory which is created by ant. There are
+a couple of different ways to execute Java programs. Here a .jar file is built
+and run with the "java -jar" command.
+
+In the shell scripts for C++ and Java, the output of the build step is routed to
+standard error by the "1>&2" directive. This keeps build step logging separate
+from the program's output.
+
+To help you write clean code, these samples use the highest level of syntax
+warnings wherever possible. The Perl script includes the "use strict" and "use
+warnings" directives. The C++ Makefile uses the "-W3" switch to set the highest
+compiler warning level and the "-Werror" to treat all warnings as errors.

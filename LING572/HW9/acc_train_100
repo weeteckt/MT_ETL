@@ -1,0 +1,13 @@
+
+
+Confusion matrix for the train2.txt data:
+row is the truth, column is the system output
+
+	guns		mideast		misc		
+guns	777		  123		  0		  
+mideast	44		  856		  0		  
+misc	102		  788		  10		  
+
+train2.txt accuracy=0.608518518518519
+
+

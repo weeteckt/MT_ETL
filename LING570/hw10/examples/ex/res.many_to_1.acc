@@ -1,0 +1,6 @@
+allow_many_to_one = 1
+gold_cluster in gold.100: cluster_num=34 token_num=100
+sys_cluster in 100_100_34/sys_cluster: cluster_num=34 token_num=100
+find_mapping: gold_size=34 sys_size=34
+total_token_num=100 match=46
+Acc=0.46

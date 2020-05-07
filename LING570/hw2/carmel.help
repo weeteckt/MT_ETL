@@ -1,0 +1,136 @@
+usage: carmel [switches] [file1 file2 ... filen]
+
+composes a sequence of weighted finite state transducers and writes the
+result to the standard output.
+
+-l (default)	left associative composition ((file1*file2) * file3 ... )
+-r		right associative composition (file1 * (file2*file3) ... )
+-s		the standard input is prepended to the sequence of files (for
+		left associative composition), or appended (if right
+		associative)
+-i		the first input (depending on associativity) is interpreted as
+		a space-separated sequence of symbols, and translated into a
+		transducer accepting only that sequence
+-P Similar to (-i) but instead of building an acceptor with a
+		single arc, construct a permutaion lattice that accepts the
+		input in all possible reorderings.
+-k n		the n best paths through the resulting transducer are written
+		to the standard output in lieu of the transducer itself
+-b		batch compostion - reads the sequence of transducers into
+		memory, except the first input (depending on associativity),
+		which consists of sequences of space-separated input symbols
+		(as in -i) separated by newlines.  The best path(s) through
+		the result of each composition are written to the standard
+		output, one per line, in the same order as the inputs that
+		generated them
+-S		as in -b, the input (file or stdin) is a newline separated
+		list of symbol sequences, except that now the odd lines are
+		input sequences, with the subsequent sequence being the
+		corresponding output sequence
+		this command scores the input / output pairs by adding the sum
+		of the weights of all possible paths producing them, printing
+		the weights one per line if -i is used, it will apply to the
+		second input, as -i consumes the first
+-n		normalize the weights of arcs so that for each state, the
+		weights all of the arcs with the same input symbol add to one
+-t		given pairs of input/output sequences, as in -S, adjust the
+		weights of the transducer so as to approximate the conditional
+		distribution of the output sequences given the input sequences
+		optionally, an extra line preceeding an input/output pair may
+		contain a floating point number for how many times the 
+		input/output pair should count in training (default is 1)
+-e w		w is the convergence criteria for training (the minimum
+		change in an arc's weight to trigger another iteration) - 
+		default w is 1E-4 (or, -4log)
+-X w		w is a perplexity convergence ratio between 0 and 1,
+		with 1 being the strictest (default w=.999)
+-f w		w is a per-training example floor weight used for training,
+		added to the counts for all arcs, immediately before normalization -
+		(this implements so-called "Dirichlet prior" smoothing)
+-U		use the initial weights of non-locked arcs as per-example prior counts
+		(in the same way as, and in addition to, -f)
+-M n		n is the maximum number of training iterations that will be
+		performed, regardless of whether the convergence criteria is
+		met - default n is 256
+-x		list only the input alphabet of the transducer to stdout
+-y		list only the output alphabet of the transducer to stdout
+-c		list only statistics on the transducer to stdout
+-F filename	write the final transducer to a file (in lieu of stdout)
+-v		invert the resulting transducer by swapping the input and
+		output symbols 
+-d		do not reduce (eliminate dead-end states) created
+-C		consolidate arcs with same source, destination, input and
+		output, with a total weight equal to the sum (clamped to a
+		maximum weight of one)
+-p w		prune (discard) all arcs with weight less than w
+-w w		prune states and arcs only used in paths w times worse
+		than the best path (1 means keep only best path, 10 = keep paths up to 10 times weaker)
+-z n		keep at most n states (those used in highest-scoring paths)
+-g n		stochastically generate n input/output pairs by following
+		random paths (first choosing an input symbol with uniform
+		probability, then using the weights to choose an output symbol
+		and destination) from the initial state to the final state
+		output is in the same form accepted in -t and -S.
+		Training a transducer on its own -g output should be a no-op.
+-G n		stochastically generate n paths by randomly picking an arc
+		leaving the current state, by joint normalization
+		until the final state is reached.
+		same output format as -k best paths
+-R n		Use n as the random seed for repeatable -g and -G results
+		default seed = current time
+-L n		while generating input/output pairs with -g or -G, give up if
+		final state isn't reached after n steps (default n=1000)
+-T n		during composition, index arcs in a hash table when the
+		product of the number of arcs of two states is greater than n 
+		(by default, n = 32)
+-N n		assign each arc in the result transducer a unique group number
+		starting at n and counting up.  If n is 0 (the special group
+		for unchangeable arcs), all the arcs are assigned to group 0
+		if n is negative, all group numbers are removed
+-A		the weights in the first transducer (depending on -l or -r, as
+		with -b, -S, and -t) are assigned to the result, by arc group
+		number.  Arcs with group numbers for which there is no
+		corresponding group in the first transducer are removed
+-m		give meaningful names to states created in composition
+		rather than just numbers
+-a		during composition, keep the identity of matching arcs from
+		the two transducers separate, assigning the same arc group
+		number to arcs in the result as the arc in the transducer it
+		came from.  This will create more states, and possibly less
+		arcs, than the normal approach, but the transducer will have
+		equivalent paths.
+-h		help on transducers, file formats
+-V		version number
+-u		Don't normalize outgoing arcs for each input during training;
+		try -tuM 1 to see forward-backward counts for arcs
+-j		Perform joint rather than conditional normalization
+-Y		Write transducer to GraphViz .dot file
+		(see http://www.research.att.com/sw/tools/graphviz/)
+-q		Suppress computation status messages (quiet!)
+-K		Assume state names are integer indexes (when the final state is an integer)
+-o g		Use learning rate growth factor g (>= 1) (default=1)
+-1		randomly scale weights (of unlocked arcs) after composition uniformly by (0..1]
+-! n		perform n additional random initializations of arcs for training, keeping the lowest perplexity
+
+some formatting switches for paths from -k or -G:
+	-I	show input symbols only
+	-O	show output symbols only
+	-E	if -I or -O is specified, omit special symbols (beginning and
+		ending with an asterisk (e.g. "*e*"))
+	-Q	if -I or -O is specified, omit outermost quotes of symbol names
+	-W	do not show weights for paths
+
+Weight output format switches
+		(by default, small/large weights are written as logarithms):
+	-Z	Write weights in logarithm form always, e.g. 'e^-10',
+		except for 0, which is written simply as '0'
+	-B	Write weights as their base 10 log (e.g. -1log == 0.1)
+	-2	Instead of e^K, output Kln (deprecated)
+	-D	Write weights as reals always, e.g. '1.234e-200'
+
+Transducer output format switches:
+	-H	One arc per line (by default one state and all its arcs per line)
+	-J	Don't omit output=input or Weight=1
+
+Confused?  Think you've found a bug?  If all else fails, e-mail graehl@isi.edu or knight@isi.edu
+

@@ -1,0 +1,108 @@
+#!/usr/bin/env perl
+
+
+## created on 12/13/05
+
+## Purpose: take Carmel paths as input, and output input/output sequence.
+
+## to run:
+##   cat input | $0 {output_first} {$delim} > output
+
+# input format
+#   (from-state -> to-state input-sym : output-sym / prob)+ path_prob
+
+use strict;
+
+#### default values
+my $exclude_e = 1;
+my $delim = "/";
+my $output_first = 0;
+my $e_str = "dummy_e_dummy";       ## the epsilon used in Carmel
+
+
+
+if(@ARGV < 1){
+	## print STDERR "usage: cat carmel_path_input | $0 {output_first} {$delim}\nThe default delim is \/; the default value for output_first is 0.\n\n\n";
+	print STDERR "use default values\n";
+}
+
+if(@ARGV > 1){
+	$delim = $ARGV[1];
+}
+
+if(@ARGV > 0){
+	$output_first = $ARGV[0];
+}
+
+
+print STDERR "delim=$delim output_first=$output_first\n";
+
+my $path_num = 0;
+my $empty_path_num = 0;
+my $invalid_path_num = 0;
+
+my $symbol_num = 0;  ## exclude *e* if $exclude_e=1
+
+my $num_patt = '\d+(\.\d+)?(e\-?\d+)?|e\^\-?\d+\.?\d+?';
+
+while(<STDIN>){
+	chomp;
+	if(/^\s*$/ || /^\#/){
+		next;
+	}
+
+	$path_num ++;
+
+	if(/^\s*0\s*$/){
+		$empty_path_num ++;
+		print "$_\n";
+		next;
+	}
+
+	my $str = "";
+
+	my $line = $_;
+
+	$line =~ s/\*e\*/\"$e_str\"/g;
+	
+	my $tmp_num = 0;
+	while($line =~ /^\s*\(\d+\s+\-\>\s+\d+\s+\"([^\"]+)\"\s+\:\s+\"([^\"]+)\"\s+\/\s+($num_patt)\s*\)(.+)$/){
+		my $input = $1;
+		my $output = $2;
+		$line = $6;
+		
+		## print "+++$line+++\n\n\n\n";
+
+		if($exclude_e && ($input eq $e_str) && ($output eq $e_str)){
+			next;
+		}
+
+		if($output_first){
+			$str .= " $output$delim$input";
+		}else{
+			$str .= " $input$delim$output";
+		}	
+
+		$tmp_num ++;
+	}		
+
+	if($line !~ /^\s*($num_patt)\s*$/){
+		print STDERR "wrong path: +$line+ in +$_+\n";
+		$invalid_path_num ++;
+		next;
+	}
+
+	$symbol_num += $tmp_num;
+	print "$str $line\n";
+}
+
+
+my $valid_path = $path_num - $invalid_path_num - $empty_path_num;
+
+my $t1 = ($symbol_num + 0.0)/$valid_path;
+print STDERR "Success! valid_path=$valid_path symbol_num=$symbol_num ave_path_leng=$t1\n";
+
+$t1 = ($empty_path_num*100.0)/$path_num;
+print STDERR "empty_path=$empty_path_num ($t1\%)  invalid_path=$invalid_path_num\n";
+
+1;

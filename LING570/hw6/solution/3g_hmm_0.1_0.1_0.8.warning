@@ -1,0 +1,10 @@
+Finish reading 100 K lines
+Finish reading 200 K lines
+Finish reading 300 K lines
+Finish reading 400 K lines
+Finish reading 500 K lines
+state_num=2209
+warning: different numbers of sym_num: claimed=7906, real=7876
+init_line_num=1
+trans_line_num=103823
+warning: different numbers of emission_line_num: claimed=411908, real=409558

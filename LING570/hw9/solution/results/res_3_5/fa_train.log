@@ -1,0 +1,9 @@
+voc_thres = 3
+Start reading res_3_5/train_voc
+Out of 7903 entries, 2391 are kept
+finish reading 2391 entries from res_3_5/train_voc
+finish 1K lines
+print out features: feat_num=44311
+sent_num=1921 word_num=46451 instance_num=46451
+rare_word_num=6707 perc=14.4388710684377
+All done

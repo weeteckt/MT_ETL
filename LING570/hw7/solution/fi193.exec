@@ -1,0 +1,121 @@
+#!/usr/bin/env perl
+
+
+## created on 11/8/07, modified from fb193.exec
+
+## Purpose: tag sentences that could contain unknown words.
+
+
+
+use strict;
+
+use lib "/home/fxia/dt_chain/193/e";
+use hmm;
+
+my $unknown_word_str = "<unk>";
+
+main();
+1;
+
+####### 
+sub main {
+    if(@ARGV < 3){
+	die "usage: $0 hmm input_file output_file {debug} > log_file\n";
+    }
+
+    my $debug = 0;
+    if(@ARGV > 3){
+	$debug = $ARGV[3];
+    }
+
+    my $hmm_file = $ARGV[0];
+    my $input_file = $ARGV[1];
+    my $output_file = $ARGV[2];
+    
+    open(my $hmm_fp, "$hmm_file") or die "cannot open $hmm_file\n";
+
+    open(my $input_fp, "$input_file") or die "cannot create $input_file\n";
+    open(my $output_fp, ">$output_file") or die "cannot create $output_file\n";
+    
+    
+    ##### step 1: read HMM
+    my $hmm = new Hmm;
+
+    print STDERR "Start Reading hmm\n";
+    my $suc = read_hmm_from_file($hmm_fp, $hmm);
+    print STDERR "Finish reading hmm\n";
+
+    ##### step 2: process the sentences
+    my $sent_num = 0;
+    my $suc_sent_num = 0;
+    my $oov_sent_num = 0;
+
+    my $insert = 0;
+    my $unk_sym_idx = sym_str_to_idx($hmm, $unknown_word_str, $insert);
+    if($unk_sym_idx < 0){
+	print STDERR  "warning: cannot find $unknown_word_str in the HMM\n";
+    }else{
+        print STDERR "the index for unknown word is $unk_sym_idx\n";
+    }
+
+    my $total_unk_word_num = 0;   # the total number of unknown tokens
+    my $total_word_num = 0;
+
+    while(<$input_fp>){
+	chomp;
+	if(/^\s*$/){
+	    next;
+	}
+
+	s/^\s+//;
+	s/\s+$//;
+	
+	my $line = $_;	
+
+	if($sent_num % 100 == 0){
+	    my $t1 = $sent_num / 1000;
+	    print STDERR "Finish decoding $sent_num lines: $suc_sent_num has the best path\n";
+	}
+
+	$sent_num ++; 
+
+	my @observ = ();
+
+	my $unk_word_num = line_to_sym_idxes($line, $hmm, \@observ, $unk_sym_idx);
+	if($unk_word_num > 0){
+	    ## print STDERR "+$line+ contains unknown words\n";
+	    $oov_sent_num ++;
+	    $total_unk_word_num += $unk_word_num;
+	}
+
+	$total_word_num += scalar @observ;
+
+    	my @best_path = ();
+
+	if($debug){
+	    print "\n\n%%%%%%%%%% sent_num=$sent_num sent=$line\n\n";
+	}
+
+	my $logprob = 0;
+	my $state_seq = "";
+	$suc = viterbi($hmm, \@observ, \@best_path, \$state_seq, 
+		       \$logprob, $debug);
+	$suc_sent_num += $suc;
+
+	if($suc){
+	    print $output_fp "$line => $state_seq $logprob\n";
+	}else{
+	    print $output_fp "$line => *** No path found ***\n";
+	}
+    }
+
+    print STDERR "Out of $sent_num sents, $suc_sent_num has a best path, oov_sent_num=$oov_sent_num\n";
+
+    my $tmp = $total_unk_word_num * 100/$total_word_num;
+
+    print STDERR "total_unknown_word=$total_unk_word_num, total_word_num=$total_word_num OOV_rate=$tmp\%\n";
+   
+    close($output_fp);
+}
+	
+

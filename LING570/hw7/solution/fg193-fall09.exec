@@ -1,0 +1,69 @@
+#!/usr/bin/env perl
+
+
+## created on 11/16/09, modified from fg193.exec
+## Only difference is that this code removes "</s>/EOS" at the end.
+
+## Purpose: given the "sent => seq prob" produced by 
+##   a trigram POS tagger, produce "w1/t1 ...."
+
+
+use strict;
+
+main();
+1;
+
+####### 
+sub main {
+    while(<STDIN>){
+	chomp;
+	if(/^\s*$/){
+	    print "$_\n";
+	    next;
+	}
+
+	my $line = $_;
+	if($line =~ /^(.+)\s+\=\>\s+(.+)\s+(\-?\d+(\.\d+)?)\s*$/){
+	    my $sent = $1;
+	    my $state_str = $2;
+	    my $logprob = $3;
+	    
+	    my @words = split(/\s+/, $sent);
+	    my @states = split(/\s+/, $state_str);
+	    
+	    my $leng = scalar @words;
+	    my $leng1 = scalar @states;
+	    if($leng + 1 != $leng1){
+		print STDERR "wrong format: word_num=$leng, state_num=$leng1 in +$line+\n";
+		next;
+	    }
+	    
+	    my $str = "";
+	    for(my $i=0; $i<$leng; $i++){
+		my $w = $words[$i];
+		my $t = $states[$i+1];
+
+		### Fei: remove </s>/EOS at the end
+		if(($i == $leng - 1) && ($w eq "</s>")){
+		    next;
+		}
+
+		if($t =~ /^(.+)\_(.+)$/){
+		    $str .= "$w/$2 ";
+		}else{
+		    print STDERR "wrong state: $t\n";
+		    next;
+		}
+	    }
+
+	    $str =~ s/\s+$//;
+	    print "$str\n";
+
+	}else{
+	    print STDERR "wrong format: +$line+\n";
+	}
+    }
+
+    print STDERR "All done\n";
+
+}

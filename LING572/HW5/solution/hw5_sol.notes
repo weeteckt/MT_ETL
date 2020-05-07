@@ -1,0 +1,104 @@
+\section{Source code}
+
+maxent_classify.pl: MaxEnt decoder
+
+calc_emp_exp.pl: calculate empirical expectation
+
+calc_model_exp.pl: calculate model expectation
+
+
+\section{Details}
+
+Steps for Q1: (The results are under ~/dt_NB_data/199_NB/e/expt1)
+
+  1. get the files
+
+     cd ~/dt_NB_data/199_NB/e/
+
+     ln -s ~/dropbox/08-09/572/hw5/examples/ .
+
+          
+   2. run vectors2classify 
+      => Mallet MaxEnt learner uses feature values
+         in both training and testing  
+
+     cd ~/dt_NB_data/199_NB/e/
+
+     %%%% train and test on binary features in ONE step:
+     vectors2classify --training-file examples/train2.vectors --testing-file examples/test2.vectors  --trainer MaxEnt --output-classifier expt1/m1 --report test:raw test:accuracy test:confusion train:confusion train:accuracy  > expt1/m1.stdout 2>expt1/m1.stderr &
+    => train accuracy mean = 0.9685185185185186 
+       test accuracy mean = 0.84 
+
+     
+     %%%%% train and test on binary features, in TWO steps
+     vectors2train --training-file examples/train2.vectors --trainer MaxEnt --output-classifier expt1/m5 --report train:confusion train:accuracy  > expt1/m5.stdout 2>expt1/m5.stderr &
+     => create expt1/m5
+        train accuracy mean = 0.9685185185185186
+
+    classify --testing-file examples/test2.vectors --classifier expt1/m5 --report test:accuracy test:confusion test:raw > expt1/m5_cl.stdout 2>expt1/m5_cl.stderr 
+    => Test data accuracy= 0.84
+ 
+    %%%% convert the model to the text format
+    classifier2info --classifer expt1/m5 > expt1/m5.txt
+
+
+
+Steps for Q2: 
+  1. write a MaxEnt decoder, maxent_classify.pl
+
+  2. test the code
+
+     cd ~/dt_NB_data/194_NB/e
+
+     %%%% training: binary, testing: binary, same as expt1/m1
+     maxent_classify.pl examples/test2.vectors.txt expt1/m5.txt expt2/m5.sys > expt2/m5.acc 2> expt2/m5.stderr
+     => Test accuracy=0.84
+
+     diff expt2/m5.sys expt1/m5_cl.stdout
+     => they are not exactly the same due to different format and rounding
+        But content-wise, they are basically the same.
+
+
+
+Steps for Q3: 
+  1. write calc_emp_exp.pl
+
+     cp  /home/fxia/dt_chain/194/e/maxent_train.pl calc_emp_exp.pl
+     modify the latter
+
+     %%%%%%%%%% calc counts
+     cd ~/dt_NB_data/199_NB/e
+
+     calc_emp_exp.pl examples/train2.vectors.txt expt3/emp_count
+     => create expt3/emp_count
+
+ 
+Steps for Q4: 
+   1. write calc_model_exp.pl
+
+     cp  /home/fxia/dt_chain/194/e/maxent_train.pl calc_model_exp.pl
+     modify the latter
+
+     %%%%%%%%%% calc counts with no model file
+     cd ~/dt_NB_data/199_NB/e
+
+     calc_model_exp.pl examples/train2.vectors.txt expt4/model_count
+     => create expt4/model_count
+    
+     %%%%%%%%%% calc counts with a model file on the training data
+     calc_model_exp.pl examples/train2.vectors.txt expt4/model_count2 expt1/m5.txt
+     => create expt4/model_count2
+        correct=2615, acc=0.968518518518519
+
+
+     %%% compare expt4/model_count2 and expt3/emp_count
+     The counts are very similar.
+
+     %%%%%%% calc counts with a model file on the test data
+     calc_model_exp.pl examples/test2.vectors.txt expt4/model_test expt1/m5.txt
+     => create expt4/model_test
+        correct=252, acc=0.84
+
+      
+ 
+     

@@ -1,0 +1,87 @@
+
+-------------------- Trial 0  --------------------
+
+Trial 0 Training edu.umass.cs.mallet.base.classify.DecisionTreeTrainer with 2700 instances
+DecisionTree learned:
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&!muslims&!sw&!waco&!pay: talk.politics.misc
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&!muslims&!sw&!waco&pay: talk.politics.misc
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&!muslims&!sw&waco&!immediately: talk.politics.guns
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&!muslims&!sw&waco&immediately: talk.politics.misc
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&!muslims&sw&!part: talk.politics.guns
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&!muslims&sw&part&!has: talk.politics.guns
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&!muslims&sw&part&has: talk.politics.misc
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&muslims&!dangerous: talk.politics.mideast
+!israel&!turkish&!gun&!fbi&!clayton&!israeli&muslims&dangerous: talk.politics.mideast
+!israel&!turkish&!gun&!fbi&!clayton&israeli&!king&!age: talk.politics.mideast
+!israel&!turkish&!gun&!fbi&!clayton&israeli&!king&age: talk.politics.mideast
+!israel&!turkish&!gun&!fbi&!clayton&israeli&king: talk.politics.mideast
+!israel&!turkish&!gun&!fbi&clayton: talk.politics.misc
+!israel&!turkish&!gun&fbi&!months&!disclaimer&!arab&!epic&!jim&!place: talk.politics.guns
+!israel&!turkish&!gun&fbi&!months&!disclaimer&!arab&!epic&!jim&place: talk.politics.guns
+!israel&!turkish&!gun&fbi&!months&!disclaimer&!arab&!epic&jim: talk.politics.guns
+!israel&!turkish&!gun&fbi&!months&!disclaimer&!arab&epic: talk.politics.misc
+!israel&!turkish&!gun&fbi&!months&!disclaimer&arab&!again: talk.politics.mideast
+!israel&!turkish&!gun&fbi&!months&!disclaimer&arab&again: talk.politics.misc
+!israel&!turkish&!gun&fbi&!months&disclaimer&!got&!likely: talk.politics.misc
+!israel&!turkish&!gun&fbi&!months&disclaimer&!got&likely: talk.politics.guns
+!israel&!turkish&!gun&fbi&!months&disclaimer&got&!people: talk.politics.guns
+!israel&!turkish&!gun&fbi&!months&disclaimer&got&people&!again: talk.politics.misc
+!israel&!turkish&!gun&fbi&!months&disclaimer&got&people&again: talk.politics.guns
+!israel&!turkish&!gun&fbi&months&!hand&!must: talk.politics.misc
+!israel&!turkish&!gun&fbi&months&!hand&must&!article: talk.politics.guns
+!israel&!turkish&!gun&fbi&months&!hand&must&article: talk.politics.misc
+!israel&!turkish&!gun&fbi&months&hand: talk.politics.guns
+!israel&!turkish&gun&!homeland&!hallam&!government&!entirely&!crack&!thread&!gen: talk.politics.guns
+!israel&!turkish&gun&!homeland&!hallam&!government&!entirely&!crack&!thread&gen: talk.politics.misc
+!israel&!turkish&gun&!homeland&!hallam&!government&!entirely&!crack&thread&!about: talk.politics.misc
+!israel&!turkish&gun&!homeland&!hallam&!government&!entirely&!crack&thread&about: talk.politics.guns
+!israel&!turkish&gun&!homeland&!hallam&!government&!entirely&crack: talk.politics.misc
+!israel&!turkish&gun&!homeland&!hallam&!government&entirely: talk.politics.misc
+!israel&!turkish&gun&!homeland&!hallam&government&!capital&!misc&!arms&!constitution: talk.politics.guns
+!israel&!turkish&gun&!homeland&!hallam&government&!capital&!misc&!arms&constitution: talk.politics.misc
+!israel&!turkish&gun&!homeland&!hallam&government&!capital&!misc&arms: talk.politics.guns
+!israel&!turkish&gun&!homeland&!hallam&government&!capital&misc: talk.politics.misc
+!israel&!turkish&gun&!homeland&!hallam&government&capital: talk.politics.misc
+!israel&!turkish&gun&!homeland&hallam&!lot&!rate: talk.politics.misc
+!israel&!turkish&gun&!homeland&hallam&!lot&rate: talk.politics.guns
+!israel&!turkish&gun&!homeland&hallam&lot&!individual: talk.politics.guns
+!israel&!turkish&gun&!homeland&hallam&lot&individual: talk.politics.guns
+!israel&!turkish&gun&homeland: talk.politics.mideast
+!israel&turkish&!mar&!liberal&!acuner: talk.politics.mideast
+!israel&turkish&!mar&!liberal&acuner: talk.politics.misc
+!israel&turkish&!mar&liberal: talk.politics.misc
+!israel&turkish&mar&!again: talk.politics.mideast
+!israel&turkish&mar&again: talk.politics.mideast
+israel&!lo&!jack&!repeated&!amendment&!vm&!temporary&!editorials&!ormer&!hearts: talk.politics.mideast
+israel&!lo&!jack&!repeated&!amendment&!vm&!temporary&!editorials&!ormer&hearts: talk.politics.mideast
+israel&!lo&!jack&!repeated&!amendment&!vm&!temporary&!editorials&ormer: talk.politics.mideast
+israel&!lo&!jack&!repeated&!amendment&!vm&!temporary&editorials: talk.politics.misc
+israel&!lo&!jack&!repeated&!amendment&!vm&temporary: talk.politics.mideast
+israel&!lo&!jack&!repeated&!amendment&vm&!most: talk.politics.mideast
+israel&!lo&!jack&!repeated&!amendment&vm&most&!wish: talk.politics.mideast
+israel&!lo&!jack&!repeated&!amendment&vm&most&wish: talk.politics.mideast
+israel&!lo&!jack&!repeated&amendment&!me&!any: talk.politics.mideast
+israel&!lo&!jack&!repeated&amendment&!me&any: talk.politics.mideast
+israel&!lo&!jack&!repeated&amendment&me: talk.politics.misc
+israel&!lo&!jack&repeated&!can: talk.politics.guns
+israel&!lo&!jack&repeated&can: talk.politics.mideast
+israel&!lo&jack&!has&!are: talk.politics.misc
+israel&!lo&jack&!has&are&!about: talk.politics.mideast
+israel&!lo&jack&!has&are&about: talk.politics.mideast
+israel&!lo&jack&has: talk.politics.mideast
+israel&lo&!an: talk.politics.guns
+israel&lo&an: talk.politics.guns
+Trial 0 Training edu.umass.cs.mallet.base.classify.DecisionTreeTrainer finished
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer training data accuracy= 0.7514814814814815
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer Test Data Confusion Matrix
+Confusion Matrix, row=true, column=predicted  accuracy=0.6
+                    label   0   1   2  |total
+  0    talk.politics.guns  41   .  59  |100
+  1 talk.politics.mideast   1  75  24  |100
+  2    talk.politics.misc  32   4  64  |100
+
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer test data accuracy= 0.6
+
+edu.umass.cs.mallet.base.classify.DecisionTreeTrainer
+Summary. train accuracy mean = 0.7514814814814815 stddev = 0.0 stderr = 0.0
+Summary. test accuracy mean = 0.6 stddev = 0.0 stderr = 0.0

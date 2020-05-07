@@ -1,0 +1,3 @@
+Logging configuration class "edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator" failed
+java.lang.ClassNotFoundException: edu.umass.cs.mallet.base.util.Logger.DefaultConfigurator
+Testing vectors loaded from res_3_5/test.vectors

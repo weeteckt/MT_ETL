@@ -1,0 +1,211 @@
+\section{Source code}
+
+build_kNN.pl: to build kNN
+
+rank_feat_by_chi_square.pl: to rank the features according to chi_square
+
+da194.exec: to find the number of features whose chi square score >= thres
+
+filter_feat.pl: to filter features
+
+
+
+\section{Steps}
+
+Steps for Q1: write build_kNN.pl
+
+
+Steps for Q2: run the code with real-valued features
+
+    cd ~/dt_NB_data/194_NB/d
+
+    %%%%% k=1, sim=1
+    build_kNN.pl train.vectors.txt test.vectors.txt 1 1 sys1_1 > acc1_1 2>stderr1_1 &
+    => Test accuracy=0.6167
+
+    %%%%% k=5, sim=1
+    build_kNN.pl train.vectors.txt test.vectors.txt 5 1 sys5_1 > acc5_1 2>stderr5_1 &
+    => Test accuracy=0.63
+
+    %%%%% k=10, sim=1
+    build_kNN.pl train.vectors.txt test.vectors.txt 10 1 sys10_1 > acc10_1 2>stderr10_1 &
+    => Test accuracy=0.6267
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%% k=1, sim=2
+    build_kNN.pl ../train.vectors.txt ../test.vectors.txt 1 2 sys1_2 > acc1_2 2>stderr1_2 &
+    => Test accuracy=0.72
+
+
+    %%%%% k=5, sim=2
+    build_kNN.pl ../train.vectors.txt ../test.vectors.txt 5 2 sys5_2 > acc5_2 2>stderr5_2 &
+    => Test accuracy=0.7
+
+
+    %%%%% k=10, sim=2
+    build_kNN.pl ../train.vectors.txt ../test.vectors.txt 10 2 sys10_2 > acc10_2 2>stderr10_2 &
+    => Test accuracy=0.66
+
+     
+
+Steps for Q3: run the code with binary features
+    
+    cd ~/dt_NB_data/194_NB/d/expt2/
+
+    %%%%% k=1, sim=1
+    build_kNN.pl train.vectors.txt test.vectors.txt 1 1 sys1_1 > acc1_1 2>stderr1_1 &
+    => Test accuracy=0.6333   
+
+    %%%%% k=5, sim=1
+    build_kNN.pl ../train.vectors.txt ../test.vectors.txt 5 1 sys5_1 > acc5_1 2>stderr5_1 &
+    => Test accuracy=0.63
+
+    %%%%% k=10, sim=1
+    build_kNN.pl ../train.vectors.txt ../test.vectors.txt 10 1 sys10_1 > acc10_1 2>stderr10_1 &
+    => Test accuracy=0.6266
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%% k=1, sim=2
+    build_kNN.pl train.vectors.txt test.vectors.txt 1 2 sys1_2 > acc1_2 2>stderr1_2 &
+    => Test accuracy=0.8233 
+
+    %%% k=5, sim=2
+     build_kNN.pl train.vectors.txt test.vectors.txt 5 2 sys5_2 > acc5_2 2>stderr5_2 &
+    => Test accuracy=0.8133
+
+
+    %%% k=10, sim=2
+    build_kNN.pl train.vectors.txt test.vectors.txt 10 2 sys10_2 > acc10_2 2>stderr10_2 &
+    => Test accuracy=0.82
+
+
+Steps for Q5:
+  1. write rank_feat_by_chi_square.pl that ranks the features according to 
+      chi_square
+
+     cd ~/dt_NB_data/194_NB/d/expt3/
+
+     cat ../expt2/train.vectors.txt | rank_feat_by_chi_square.pl > feat_list
+     => create feat_list
+
+
+  2. write da194.exec to find the number of features whose chi square
+       score >= thres
+
+     %%%%% p=0.10
+     cat feat_list | da194.exec 4.605
+     => 8499
+
+     %%%% p=0.05
+     cat feat_list | da194.exec 5.991
+     => 7484
+
+     %%%% p=0.025
+     cat feat_list | da194.exec 7.378
+     => 5223
+
+     %%%% p=0.01
+     cat feat_list | da194.exec 9.210
+     => 3895
+
+     %%%% p=0.001
+     cat feat_list | da194.exec 13.816
+     => 2401
+
+
+  3. write filter_feat.pl
+
+
+  4. expt5/: use k=1, real-value, cosine function
+
+      cd ~/dt_NB_data/194_NB/d/expt5
+
+      %%%% baseline
+      build_kNN.pl ../train.vectors.txt ../test.vectors.txt 1 2 all/sys > all/acc 2>all/stderr &
+     => Test acc=0.72
+
+      %%% p=0.001
+      cat ../train.vectors.txt | filter_feat.pl feat_list 2401 > p0.001/train
+
+      build_kNN.pl p0.001/train ../test.vectors.txt 1 2 p0.001/sys > p0.001/acc 2>p0.001/stderr & 
+      => Test acc=0.7467
+
+      %%%% p=0.01: 3895 feats
+      cat ../train.vectors.txt | filter_feat.pl feat_list 3895 > p0.01/train
+
+      build_kNN.pl p0.01/train ../test.vectors.txt 1 2 p0.01/sys > p0.01/acc 2>p0.01/stderr & 
+      => Test acc=0.7467
+
+      %%%% p=0.025: 5223 feats
+     cat ../train.vectors.txt | filter_feat.pl feat_list 5223 > p0.025/train
+  
+     build_kNN.pl p0.025/train ../test.vectors.txt 1 2 p0.025/sys > p0.025/acc 2>p0.025/stderr & 
+     => Test Acc=0.7533
+
+      %%%%% p=0.05: 7484 feats
+     cat ../train.vectors.txt | filter_feat.pl feat_list 7484 > p0.05/train
+     
+
+     build_kNN.pl p0.05/train ../test.vectors.txt 1 2 p0.05/sys > p0.05/acc 2>p0.05/stderr &
+     => Test acc=0.7367
+
+     %%%% p=0.1: 8499 feats
+     cat ../train.vectors.txt | filter_feat.pl feat_list 8499 > p0.1/train
+
+     build_kNN.pl p0.1/train ../test.vectors.txt 1 2 p0.1/sys > p0.1/acc 2>p0.1/stderr &
+     => Test acc=0.75
+
+
+     
+
+
+
+
+Steps for Q6: run the experiment with binary features:
+
+     cd ~/dt_NB_data/194_NB/d/expt3
+
+     %%%% baseline: take all features
+     build_kNN.pl ../expt2/train.vectors.txt ../expt2/test.vectors.txt 10 2 all/sys 1>all/acc 2>all/stderr &
+     => test acc=0.82
+
+     %%% p=0.001
+     cat ../expt2/train.vectors.txt | filter_feat.pl feat_list 2401 > p0.001/train
+     cat ../expt2/test.vectors.txt | filter_feat.pl feat_list 2401 > p0.001/test
+     build_kNN.pl p0.001/train p0.001/test 10 2 p0.001/sys > p0.001/acc 2>p0.001/stderr &
+     => test acc=0.8533
+
+     build_kNN.pl p0.001/train ../expt2/test.vectors.txt 10 2 sys > acc 2>stderr & 
+     
+     diff p0.001/sys sys
+     => the same
+
+     %%%% p=0.01: 3895 feats
+     cat ../expt2/train.vectors.txt | filter_feat.pl feat_list 3895 > p0.01/train
+
+     build_kNN.pl p0.01/train ../expt2/test.vectors.txt 10 2 p0.01/sys > p0.01/acc 2>p0.01/stderr & 
+     => test acc=0.8567   
+  
+     %%%% p=0.025: 5223 feats
+     cat ../expt2/train.vectors.txt | filter_feat.pl feat_list 5223 > p0.025/train
+  
+     build_kNN.pl p0.025/train ../expt2/test.vectors.txt 10 2 p0.025/sys > p0.025/acc 2>p0.025/stderr & 
+     => test acc=0.86
+
+     %%%%% p=0.05: 7484 feats
+     cat ../expt2/train.vectors.txt | filter_feat.pl feat_list 7484 > p0.05/train
+
+     build_kNN.pl p0.05/train ../expt2/test.vectors.txt 10 2 p0.05/sys > p0.05/acc 2>p0.05/stderr &
+     => test acc=0.8267
+
+
+     %%%% p=0.1: 8499 feats
+     cat ../expt2/train.vectors.txt | filter_feat.pl feat_list 8499 > p0.1/train
+
+     build_kNN.pl p0.1/train ../expt2/test.vectors.txt 10 2 p0.1/sys > p0.1/acc 2>p0.1/stderr &
+     => test acc=0.8567
+
+    
+
+
+

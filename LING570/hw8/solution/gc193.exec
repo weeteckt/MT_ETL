@@ -1,0 +1,140 @@
+#!/usr/bin/env perl
+
+## created on 11/24/07
+
+## Purpose: call ga193.exec to prepare the text vector files
+##
+## the function is similar to text2vectors in Mallet package.
+## 
+
+use strict;
+
+main();
+1;
+
+####### 
+sub main {
+    my $lowercase = 1;
+
+    if(@ARGV < 4){
+	die "usage: $0 train_file test_file ratio dir1 {dir2}*\n";
+    }
+
+    my $train_file = $ARGV[0]; 
+    my $test_file = $ARGV[1];
+    my $ratio = $ARGV[2];
+
+    open(my $train_fp, ">$train_file") or 
+	die "cannot create $train_file\n";
+
+    open(my $test_fp, ">$test_file") or 
+	die "cannot create $test_file\n";
+
+    my $arg_num = scalar @ARGV;
+    
+    print STDERR "ratio=$ratio\n\n";
+
+    ###### process each directory
+    my $total_cnt = 0;
+    my $total_train_cnt = 0;
+    my $total_test_cnt = 0;
+
+    for(my $i=3; $i<$arg_num; $i++){
+	my $dir = $ARGV[$i];
+	my $label = `basename $dir`;
+	$label =~ s/\s+$//;
+	
+	print STDERR "processing $dir, the label is +$label+\n";
+	
+	my $str = `ls $dir/*`;
+
+	
+	my @filenames = split(/\n+/, $str);
+	my $size = scalar @filenames;
+	$size *= $ratio;
+
+	my $cnt = 0;
+	my $train_cnt = 0;
+	my $test_cnt = 0;
+
+	foreach my $file (@filenames){
+	    open(my $input_fp, $file) or die "cannot open $file\n";
+	    my $feat_line = get_feat_line($input_fp, $lowercase);
+	    if($cnt < $size){
+		print $train_fp "$file $label $feat_line\n";
+		$train_cnt ++;
+	    }else{
+		print $test_fp "$file $label $feat_line\n";
+		$test_cnt ++;
+	    }
+	    close($input_fp);
+	    $cnt ++;
+	}
+	print STDERR "finish reading $dir, cnt=$cnt train_cnt=$train_cnt test_cnt=$test_cnt\n\n";
+	
+	$total_cnt += $cnt;
+	$total_train_cnt += $train_cnt;
+	$total_test_cnt += $test_cnt;
+    }
+
+    close($train_fp);
+    close($test_fp);
+
+    my $dir_num = $arg_num - 3;
+    print STDERR "All done, $dir_num labels, total=$total_cnt training=$total_train_cnt testing=$total_test_cnt\n";
+}
+
+
+#### return "f1 v1 f2 v2 ...."
+sub get_feat_line {
+    my ($input_fp, $lowercase) = @_;
+
+    my $start = 0;
+    
+    my %hash = ();
+    while(<$input_fp>){
+	chomp;
+	if(/^\s*$/){
+	    $start = 1;
+	    next;
+	}
+
+	if(!$start){
+	    next;
+	}
+
+	### replace non-letter with whitespace
+	s/\W/ /g;
+	s/\d/ /g;
+	s/\_/ /g;
+
+	s/^\s+//;
+	s/\s+$//;
+
+	if($lowercase){
+	    tr/A-Z/a-z/;
+	}
+	
+	my @parts = split(/\s+/);
+	foreach my $part (@parts){
+	    if(defined($hash{$part})){
+		$hash{$part} ++;
+	    }else{
+		$hash{$part} = 1;
+	    }
+	}
+    }
+
+
+
+    my $str = "";
+    foreach my $key (sort keys %hash){
+	my $val = $hash{$key};
+	$str .= "$key $val ";
+    }
+
+    $str =~ s/\s+$//;
+    return $str;
+}
+	
+

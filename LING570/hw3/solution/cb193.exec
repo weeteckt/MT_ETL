@@ -1,0 +1,60 @@
+#!/usr/bin/env perl
+
+## modified from aab100.exec
+
+## Purpose: given "word tag prob cnt" file, produce an emission fst
+##
+## output file:
+##  S
+##  (S (S t w prob))
+##
+
+## Remember to replace " with -QUOTE- 
+
+use strict;
+
+main();
+
+1;
+
+
+##############################################
+sub main {
+    my $sym = "S";
+    my $arc_num = 0;
+    
+    print "$sym\n";
+
+    while(<>){
+	if(/^\s*$/){
+	    next;
+	}
+	
+	my @parts = split(/\s+/);
+	if(scalar @parts < 3){
+	    print STDERR "wrong format: +$_+\n";
+	    exit(1);
+	}
+	
+	my $t = $parts[1];
+	my $w = $parts[0];
+	my $p = $parts[2];
+
+	$w =~ s/\"/-QUOTE-/g;   # deal with quotation mark
+        $t =~ s/\"/-QUOTE-/g;
+	
+	if(($p > 1.0) || ($p < 0)){
+	    print STDERR "the prob +$p+ is not in the range: +$_+\n";
+	    exit(1);
+	}
+
+	print "($sym ($sym \"$w\" \"$t\" $p))\n";
+	$arc_num ++;
+    }
+
+    print STDERR "Success! arc_num=$arc_num\n";
+}
+
+
+	
+

@@ -1,0 +1,21 @@
+
+-------------------- Trial 0  --------------------
+
+Trial 0 Training edu.umass.cs.mallet.base.classify.DecisionTreeTrainer with 2700 instances
+DecisionTree learned:
+!israel: talk.politics.guns
+israel: talk.politics.mideast
+Trial 0 Training edu.umass.cs.mallet.base.classify.DecisionTreeTrainer finished
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer training data accuracy= 0.45296296296296296
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer Test Data Confusion Matrix
+Confusion Matrix, row=true, column=predicted  accuracy=0.4166666666666667
+                    label   0   1   2  |total
+  0    talk.politics.guns 100   .   .  |100
+  1 talk.politics.mideast  75  25   .  |100
+  2    talk.politics.misc  98   2   .  |100
+
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer test data accuracy= 0.4166666666666667
+
+edu.umass.cs.mallet.base.classify.DecisionTreeTrainer
+Summary. train accuracy mean = 0.45296296296296296 stddev = 0.0 stderr = 0.0
+Summary. test accuracy mean = 0.4166666666666667 stddev = 0.0 stderr = 0.0

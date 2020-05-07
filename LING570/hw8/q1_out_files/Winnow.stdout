@@ -1,0 +1,18 @@
+
+-------------------- Trial 0  --------------------
+
+Trial 0 Training edu.umass.cs.mallet.base.classify.WinnowTrainer with 2700 instances
+Trial 0 Training edu.umass.cs.mallet.base.classify.WinnowTrainer finished
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.WinnowTrainer training data accuracy= 0.727037037037037
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.WinnowTrainer Test Data Confusion Matrix
+Confusion Matrix, row=true, column=predicted  accuracy=0.6833333333333333
+      label   0   1   2  |total
+  0    guns  46   .  63  |109
+  1 mideast   .  61  26  |87
+  2    misc   1   5  98  |104
+
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.WinnowTrainer test data accuracy= 0.6833333333333333
+
+edu.umass.cs.mallet.base.classify.WinnowTrainer
+Summary. train accuracy mean = 0.727037037037037 stddev = 0.0 stderr = 0.0
+Summary. test accuracy mean = 0.6833333333333333 stddev = 0.0 stderr = 0.0

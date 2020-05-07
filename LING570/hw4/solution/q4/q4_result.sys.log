@@ -1,0 +1,59 @@
+Input line 1: "c" "i" "v" "i" "l"
+	(10 states / 15 arcs)
+Input line 2: "c" "i" "v" "i" "l" "i" "z" "e"
+	(16 states / 21 arcs reduce-> 12/16)
+Input line 3: "c" "i" "v" "i" "l" "i" "z" "e" "a" "t" "i" "o" "n"
+	(23 states / 29 arcs reduce-> 18/23)
+Input line 4: "c" "i" "v" "i" "l" "i" "z" "a" "t" "i" "o" "n"
+	(0 states / 0 arcs)
+Empty or invalid result of composition with transducer q4_expand_fsm.
+Input line 5: "n" "o" "v" "e" "l"
+	(10 states / 14 arcs)
+Input line 6: "n" "o" "v" "e" "l" "t" "y"
+	(14 states / 18 arcs reduce-> 11/14)
+Input line 7: "l" "u" "c" "i" "d" "i" "t" "y"
+	(16 states / 20 arcs reduce-> 12/15)
+Input line 8: "k" "i" "n" "d"
+	(7 states / 6 arcs)
+Input line 9: "k" "i" "n" "d" "n" "e" "s" "s"
+	(13 states / 12 arcs reduce-> 12/11)
+Input line 10: "h" "a" "p" "p" "y"
+	(8 states / 8 arcs)
+Input line 11: "h" "a" "p" "p" "y" "n" "e" "s" "s"
+	(14 states / 14 arcs reduce-> 13/13)
+Input line 12: "h" "a" "p" "p" "i" "n" "e" "s" "s"
+	(0 states / 0 arcs)
+Empty or invalid result of composition with transducer q4_expand_fsm.
+Input line 13: "a" "t" "t" "r" "a" "c" "t"
+	(10 states / 10 arcs)
+Input line 14: "a" "t" "t" "r" "a" "c" "t" "i" "v" "e"
+	(15 states / 15 arcs reduce-> 14/14)
+Input line 15: "a" "t" "t" "r" "a" "c" "t" "i" "v" "e" "n" "e" "s" "s"
+	(21 states / 21 arcs reduce-> 19/19)
+Input line 16: "a" "c" "t"
+	(6 states / 6 arcs)
+Input line 17: "a" "c" "t" "i" "v" "e"
+	(11 states / 11 arcs reduce-> 10/10)
+Input line 18: "a" "c" "t" "i" "v" "e" "n" "e" "s" "s"
+	(17 states / 17 arcs reduce-> 15/15)
+Input line 19: "a" "c" "t" "i" "v" "e" "l" "y"
+	(15 states / 15 arcs reduce-> 13/13)
+Input line 20: "m" "o" "u" "t" "h"
+	(8 states / 7 arcs)
+Input line 21: "m" "o" "u" "t" "h" "f" "u" "l"
+	(13 states / 12 arcs reduce-> 12/11)
+Input line 22: "h" "o" "p" "e"
+	(7 states / 7 arcs)
+Input line 23: "h" "o" "p" "e" "f" "u" "l"
+	(12 states / 12 arcs reduce-> 11/11)
+Input line 24: "t" "a" "l" "k"
+	(7 states / 6 arcs)
+Input line 25: "t" "a" "l" "k" "a" "t" "i" "v" "e"
+	(14 states / 13 arcs reduce-> 13/12)
+Input line 26: "t" "a" "l" "k" "a" "t" "i" "v" "e" "n" "e" "s" "s"
+	(20 states / 19 arcs reduce-> 18/17)
+Input line 27: "c" "h" "e" "e" "r"
+	(8 states / 9 arcs)
+Input line 28: "c" "h" "e" "e" "r" "f" "u" "l"
+	(13 states / 14 arcs reduce-> 12/13)
+No lines of input provided.

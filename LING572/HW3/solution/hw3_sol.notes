@@ -1,0 +1,131 @@
+%%%%% Commands for Hw3
+
+
+build_NB.pl => build_NB1.sh    <===========================
+build_NB2.pl => build_NB2.sh   <===========================
+
+
+Steps for Q1:
+  0. cd ~/dt_NB_data/199_NB/c
+
+     ln -s ~/dropbox/09-10/572/hw3/examples/test.vectors.txt .
+     ln -s ~/dropbox/09-10/572/hw3/examples/train.vectors.txt .
+
+
+  1. train and testing
+
+    info2vectors --input train.vectors.txt  --output train.vectors
+    => create train.vectors
+
+    info2vectors --input test.vectors.txt  --output test.vectors  --use-pipe-from train.vectors
+    => create test.vectors
+
+
+   2. run the Mallet NB learner:
+
+     vectors2classify --training-file train.vectors --testing-file test.vectors  --trainer NaiveBayes --output-classifier de3_model --report test:raw test:accuracy test:confusion train:confusion train:accuracy  > de3.stdout 2>de3.stderr
+     => create de3.stdout
+
+     tail de3.stdout
+     => train accuracy mean = 0.9425925925925925
+        test accuracy mean = 0.8833333333333333
+
+
+Steps for Q3:
+   1. delta=0.1
+  
+      build_NB.pl train.vectors.txt test.vectors.txt 0 0.1 q3/model0.1 q3/sys0.1 > q3/m0.1.stdout 2>q3/m0.1.stderr &
+      
+      more q3/m0.1.stdout
+      => Training accuracy=0.93037037037037037
+         Test accuracy=0.88
+
+
+   2. delta=0.5
+
+      build_NB.pl train.vectors.txt test.vectors.txt 0 0.5 q3/model0.5 q3/sys0.5 > q3/m0.5.stdout 2>q3/m0.5.stderr &
+      => Training accuracy=0.91037037037037037
+         Test accuracy=0.863333333333333333
+
+
+   3. delta=1
+
+     build_NB.pl train.vectors.txt test.vectors.txt 0 1 q3/model1 q3/sys1 > q3/m1.stdout 2>q3/m1.stderr &
+     => Training accuracy=0.897037037037037037
+        Test accuracy=0.84
+
+   4. delta=2
+
+     build_NB.pl train.vectors.txt test.vectors.txt 0 2 q3/model2 q3/sys2 > q3/m2.stdout 2>q3/m2.stderr &
+     => Training accuracy=0.87962962962962963
+        Test accuracy=0.823333333333333333
+
+
+
+Steps for Q4:
+   0. cd ~/dt_NB_data/199_NB/c/q4/
+
+   1. delta=0.1
+     build_NB2.pl ../train.vectors.txt ../test.vectors.txt 0 0.1 model0.1 sys0.1 > m0.1.stdout 2>m0.1.stderr &
+     => Training accuracy=0.957037037037037037
+        Test accuracy=0.913333333333333333
+
+   2. delta=0.5
+     build_NB2.pl ../train.vectors.txt ../test.vectors.txt 0 0.5 model0.5 sys0.5 > m0.5.stdout 2>m0.5.stderr &
+     => Training accuracy=0.95037037037037037
+        Test accuracy=0.906666666666666667
+
+   3. delta=1
+     build_NB2.pl ../train.vectors.txt ../test.vectors.txt 0 1 model1 sys1 > m1.stdout 2>m1.stderr &
+     => Training accuracy=0.944814814814814815
+        Test accuracy=0.9
+
+
+   4. delta=2
+
+     build_NB2.pl ../train.vectors.txt ../test.vectors.txt 0 2 model2 sys2 > m2.stdout 2>m2.stderr &
+     => Training accuracy=0.94
+        Test accuracy=0.896666
+
+   
+
+Steps for Q5:
+   0. get the data
+
+      cd ~/dt_NB_data/199_NB/c/q5/
+
+      %%%% binarize features
+      cat ../train.vectors.txt | ba194.exec > train.vectors.txt
+
+      cat ../test.vectors.txt | ba194.exec > test.vectors.txt
+
+
+    1. delta=0.1
+
+     build_NB2.pl train.vectors.txt test.vectors.txt 0 0.1 model0.1 sys0.1 > m0.1.stdout 2>m0.1.stderr &
+     => Training accuracy=0.95962962962963
+        Test accuracy=0.91
+
+
+    2. delta=0.5
+
+     build_NB2.pl train.vectors.txt test.vectors.txt 0 0.5 model0.5 sys0.5 > m0.5.stdout 2>m0.5.stderr &
+     => Training accuracy=0.956296296296296
+        Test accuracy=0.903333333333333
+
+
+   3. delta=1
+
+     build_NB2.pl train.vectors.txt test.vectors.txt 0 1 model1 sys1 > m1.stdout 2>m1.stderr &
+     => Training accuracy=0.952962962962963
+        Test accuracy=0.896666666666667
+
+   4. delta=2
+
+     build_NB2.pl train.vectors.txt test.vectors.txt 0 2 model2 sys2 > m2.stdout 2>m2.stderr &
+     => Training accuracy=0.947777777777778
+        Test accuracy=0.896666666666667
+
+
+
+

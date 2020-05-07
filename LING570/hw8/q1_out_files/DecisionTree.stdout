@@ -1,0 +1,33 @@
+
+-------------------- Trial 0  --------------------
+
+Trial 0 Training edu.umass.cs.mallet.base.classify.DecisionTreeTrainer with 2700 instances
+DecisionTree learned:
+!israel&!turkish&!gun&!clayton: misc
+!israel&!turkish&!gun&clayton: misc
+!israel&!turkish&gun&!homeland: guns
+!israel&!turkish&gun&homeland: mideast
+!israel&turkish&!arromdee&!liberal: mideast
+!israel&turkish&!arromdee&liberal: misc
+!israel&turkish&arromdee&!c: mideast
+!israel&turkish&arromdee&c: mideast
+israel&!lo&!repeated&!signature: mideast
+israel&!lo&!repeated&signature: misc
+israel&!lo&repeated&!just: guns
+israel&!lo&repeated&just: mideast
+israel&lo&!you: guns
+israel&lo&you: guns
+Trial 0 Training edu.umass.cs.mallet.base.classify.DecisionTreeTrainer finished
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer training data accuracy= 0.5981481481481481
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer Test Data Confusion Matrix
+Confusion Matrix, row=true, column=predicted  accuracy=0.6
+      label   0   1   2  |total
+  0    guns  33   .  76  |109
+  1 mideast   1  57  29  |87
+  2    misc  10   4  90  |104
+
+Trial 0 Trainer edu.umass.cs.mallet.base.classify.DecisionTreeTrainer test data accuracy= 0.6
+
+edu.umass.cs.mallet.base.classify.DecisionTreeTrainer
+Summary. train accuracy mean = 0.5981481481481481 stddev = 0.0 stderr = 0.0
+Summary. test accuracy mean = 0.6 stddev = 0.0 stderr = 0.0

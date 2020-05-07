@@ -1,0 +1,61 @@
+#!/usr/bin/env perl
+
+
+## created on 1/21/08
+
+## Purpose: throw away features that occur less than thres times
+##   except for the curW features.
+
+## to run:
+##    cat feat_list | $0 thres > output
+
+## the format of feat_list is:
+##  feat_name cnt
+
+
+use strict;
+
+main();
+
+1;
+
+
+#########################
+sub main {
+    if(@ARGV != 1){
+	die "usage: cat feat_list | $0 thres > output\n";
+    }
+
+    my $thres = $ARGV[0];
+
+    print STDERR "thres=$thres\n";
+
+    my $feat_num = 0;
+    my $kept_num = 0;
+
+    while(<STDIN>){
+	chomp;
+	if(/^\s*$/){
+	    next;
+	}
+
+	my $line = $_;
+	my @parts = split(/\s+/, $line);
+	if(scalar @parts < 2){
+	    print STDERR "wrong format: +$_+\n";
+	    next;
+	}
+
+	my $feat = $parts[0];
+	my $cnt = $parts[1];
+	$feat_num ++;
+	if($feat =~ /^curW\=/ || $cnt >= $thres){
+	    $kept_num ++;
+	    print "$line\n";
+	}
+
+    }
+
+    print STDERR "Out of $feat_num features, $kept_num are kept\n";
+}
+

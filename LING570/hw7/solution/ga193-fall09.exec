@@ -1,0 +1,27 @@
+#!/usr/bin/env perl
+
+### Purpose: 
+### created on 
+
+use strict;
+
+main();
+
+1;
+
+sub main {
+    my $cnt = 0;
+
+    while(<STDIN>){
+	chomp;
+	if(/^\s*$/){
+	    print "$_\n";
+	    next;
+	}
+	 
+	print "$_ </s>\n";
+	$cnt ++;
+    }
+
+    print STDERR "All done: cnt=$cnt\n";
+}

@@ -1,0 +1,24 @@
+Input line 1: "c" "u" "t"
+	(6 states / 6 arcs)
+Input line 2: "c" "u" "t" "s"
+	(8 states / 8 arcs reduce-> 7/7)
+Input line 3: "c" "u" "t" "e" "d"
+	(0 states / 0 arcs)
+Empty or invalid result of composition with transducer q3/q3_expand_fsm.
+Input line 4: "c" "u" "t" "i" "n" "g"
+	(10 states / 10 arcs reduce-> 9/9)
+Input line 5: "c" "u" "t" "t" "i" "n" "g"
+	(0 states / 0 arcs)
+Empty or invalid result of composition with transducer q3/q3_expand_fsm.
+Input line 6: "s" "p" "e" "a" "k" "s"
+	(10 states / 16 arcs reduce-> 9/15)
+Input line 7: "s" "p" "e" "a" "k" "i" "n" "g"
+	(12 states / 18 arcs reduce-> 11/17)
+Input line 8: "s" "p" "o" "k" "e"
+	(8 states / 16 arcs reduce-> 7/15)
+Input line 9: "s" "p" "e" "a" "k"
+	(8 states / 14 arcs)
+Input line 10: "s" "p" "e" "a" "k" "e" "d"
+	(0 states / 0 arcs)
+Empty or invalid result of composition with transducer q3/q3_expand_fsm.
+No lines of input provided.

@@ -1,0 +1,10 @@
+containUC 10207
+containNum 10207
+containHyp 10207
+prevT=NN 6130
+prevT=NNP 5102
+prevT=IN 4850
+prevT=DT 3990
+next2W=EOS 3841
+prev2W=BOS 3841
+prevT=NNS 2966

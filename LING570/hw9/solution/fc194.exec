@@ -1,0 +1,39 @@
+#!/usr/bin/env perl
+
+
+## created on 2/13/08
+
+## Purpose: check that a line has even number of fields
+
+## to run:
+##    cat input_file | $0 
+
+
+use strict;
+
+main();
+
+1;
+
+
+#########################
+sub main {
+    while(<STDIN>){
+	chomp;
+	if(/^\s*$/){
+	    next;
+	}
+
+	my $line = $_;
+	my @parts = split(/\s+/, $line);
+	my $part_num = scalar @parts;
+	
+	if($part_num % 2 != 0){
+	    die "wrong format: $part_num parts in +$line+\n";
+	}
+
+	$line =~ s/\,/comma/g;
+	print "$line\n";
+    }
+}
+

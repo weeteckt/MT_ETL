@@ -1,0 +1,44 @@
+#!/usr/bin/env perl
+
+
+## Purpose: given a sentence, add quotation around every word.
+##   This is the format required by Carmel.
+
+use strict;
+
+my $sent_num = 0;
+my $word_num = 0;
+
+while(<>){
+	if(/^\s*$/ || /^\#/){
+		next;
+	}
+
+	s/^\s+//;
+	s/\s+$//;
+
+	my @parts = split(/\s+/);
+	my $tmp = scalar @parts;
+	for(my $i=0; $i<$tmp; $i++){
+	    my $w = $parts[$i];
+	    
+	    $w =~ s/\"/-QUOTE-/g;   # deal with quotation mark
+
+	    if($i != $tmp-1){
+		print "\"$w\" ";	
+	    }else{
+		print "\"$w\"\n";
+	    }
+	}
+
+	$sent_num ++;
+	$word_num += $tmp;
+}
+
+
+my $t1 = ($word_num + 0.0)/$sent_num;
+print STDERR "Success! sent_num=$sent_num word_num=$word_num ave_leng=$t1\n";
+
+
+	
+

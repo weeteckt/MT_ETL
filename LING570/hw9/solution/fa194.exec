@@ -1,0 +1,315 @@
+#!/usr/bin/env perl
+
+
+## created on 2/11/08
+
+## Purpose: creat feature vectors for the data
+
+## to run:
+##    cat input_file output_file 
+
+## The format of the input_file is:
+##   w1/t1 w2/t2 ...
+
+## The format of the output_file is:
+##   w1 f1=w 1 f2=w 1 ...
+
+## The format of the output_file.feat is:
+##   feature count
+##
+##   The count is the occurrence of the feature, not the number of instances
+##     where the feat occurs.
+
+
+## features:
+##   w_-1
+##   w_-2
+##   w_+1
+##   w_+2
+##   t_-1
+##   t_-2 t_-1
+##   
+##   if w_0 is not rare
+##    then  w_0
+##    else
+##     X is prefix of w_i, |X| <= 4
+##     X is suffix of w_i, |X| <= 4
+##     w_i contains number
+##     w_i contains uppercase character
+##     w_i contains hyphen
+
+
+my $BOS = "BOS";
+my $EOS = "EOS";
+
+use strict;
+
+main();
+
+1;
+
+
+#########################
+sub main {
+    
+    ##### step 1: read the arguments
+    if(@ARGV < 2){
+	die "Creating a vector file for POS tagging\n Usage: $0 input_file output_file {voc} {thres}\n The voc is provided, the words are treated as rare if they are not in the voc\n If the voc is not provided, all the words are treated as not-rare\n";
+    }
+
+    my $input_file = $ARGV[0];
+    my $output_file = $ARGV[1];
+    my $use_voc = 0;
+    my %voc = ();
+    my $voc_thres = 0;
+
+    if(@ARGV > 3){
+	$voc_thres = $ARGV[3]; 
+    }
+
+    print STDERR "voc_thres = $voc_thres\n";
+
+    if(@ARGV > 2){
+	$use_voc = 1;
+	my $voc_file = $ARGV[2];
+	open(my $voc_fp, "$voc_file") or die "cannot open $voc_file\n";
+	print STDERR "Start reading $voc_file\n";
+	my $size = read_voc($voc_fp, $voc_thres, \%voc);
+	print STDERR "finish reading $size entries from $voc_file\n";
+    }
+
+    open(my $input_fp, "$input_file") or die "cannot open $input_file\n";
+    open(my $output_fp, ">$output_file") or die "cannot create $output_file\n";
+    
+    my $feat_file = "$output_file.feat";
+    open(my $feat_fp, ">$feat_file") or die "cannot create $feat_file\n";
+    
+
+    ##### step 2: process each line
+    my $line_num = 0;
+    my $total_word_num = 0;
+    my $total_vector_num = 0;
+    my $rare_word_num = 0;
+
+    my %feat_hash = ();
+
+    while(<$input_fp>){
+	chomp;
+
+	$line_num ++;
+	if(/^\s*$/){
+	    next;
+	}
+
+	s/^\s+//;
+	s/\s+$//;
+
+	my $line = $_;
+	my @words = ();
+	my @tags = ();
+
+	if($line_num % 1000 == 0){
+	    print STDERR "finish ", $line_num/1000, "K lines\n";
+	}
+
+	my $sent_leng = split_into_wt_pairs($line, \@words, \@tags);
+	if($sent_leng < 0){
+	    die "$line_num: line with wrong format: +$line\n";
+	}
+	
+
+	
+	my @vector_lines = ();
+	my $vector_num = 
+	    form_vector(\@words, \@tags, $line_num, $use_voc, \%voc,
+			\%feat_hash, \@vector_lines, \$rare_word_num);
+	print $output_fp join("\n", @vector_lines), "\n";
+
+	$total_word_num += $sent_leng;
+	$total_vector_num += $vector_num;
+    }
+
+    ############# print feat
+    my $feat_num = scalar (keys %feat_hash);
+    print STDERR "print out features: feat_num=$feat_num\n";
+    foreach my $feat (sort {$feat_hash{$b} <=> $feat_hash{$a}} keys %feat_hash){
+	my $cnt = $feat_hash{$feat};
+	print $feat_fp "$feat $cnt\n";
+    }
+
+    close($feat_fp);
+
+    print STDERR "sent_num=$line_num word_num=$total_word_num instance_num=$total_vector_num\n";
+    my $perc = $rare_word_num * 100/$total_word_num;
+    print STDERR "rare_word_num=$rare_word_num perc=$perc\n";
+    print STDERR "All done\n";
+}
+
+## form the vectors for the words in a sentence.
+## return the sentence length
+sub form_vector {
+    my ($word_ptr, $tag_ptr, $line_num, $use_voc, $voc,
+	$feat_hash, $vectors_ptr, $rare_word_num) = @_;
+
+    @$vectors_ptr = ();
+
+    my $word_num = scalar @$word_ptr;
+
+    for(my $i=0; $i<$word_num; $i++){
+	my $cur_word = $word_ptr->[$i];
+	my $prev_word = $BOS;
+	my $prev2_word = $BOS;
+	my $next_word = $EOS;
+	my $next2_word = $EOS;
+	
+	my $prev_tag = $BOS;
+	my $prev2_tag = $BOS;
+	my $cur_tag = $tag_ptr->[$i];
+
+	if($i > 0){
+	    $prev_word = $word_ptr->[$i-1];
+	    $prev_tag = $tag_ptr->[$i-1];
+	}
+
+	if($i > 1){
+	    $prev2_word = $word_ptr->[$i-2];
+	    $prev2_tag = $tag_ptr->[$i-2];
+	}
+
+	if($i < $word_num - 1){
+	    $next_word = $word_ptr->[$i+1];
+	}
+
+	if($i < $word_num - 2){
+	    $next2_word = $word_ptr->[$i+2];
+	}
+
+	my $prevTwoTags = "$prev2_tag+$prev_tag";
+	
+	my $res = "$line_num-$i-$cur_word $cur_tag";
+
+	my $str = "prevW=$prev_word 1 prev2W=$prev2_word 1 nextW=$next_word 1 next2W=$next2_word 1 prevT=$prev_tag 1 prevTwoTags=$prevTwoTags 1";
+
+	if(!$use_voc || defined($voc->{$cur_word})){
+	    $str = "curW=$cur_word 1 $str";
+	}else{
+	    $$rare_word_num ++;
+	    my $contain_num = 0;
+	    if($cur_word =~ /[0-9]/){
+		$contain_num=1;
+	    }
+
+	    my $contain_uppercase = 0;
+	    if($cur_word =~ /[A-Z]/){
+		$contain_uppercase = 1;
+	    }
+	    
+	    my $contain_hyphen = 0;
+	    if($cur_word =~ /\-/){
+		$contain_hyphen = 1;
+	    }	
+	    
+	    $str .= " containNum $contain_num containUC $contain_uppercase containHyp $contain_hyphen";
+
+	    my @chars = split(//, $cur_word);
+	    my $word_leng = scalar @chars;
+
+	    my $pref = "";
+	    for(my $j=0; $j<4; $j++){
+		if($j < $word_leng){
+		    $pref .= $chars[$j];
+		    $str .= " pref=$pref 1";
+		}
+	    }
+
+	    my $suf = "";
+	    for(my $j=$word_leng-1; $j>=$word_leng-4; $j--){
+		if($j >= 0){
+		    $suf = $chars[$j] . $suf;
+		    $str .= " suf=$suf 1";
+		}
+	    }
+	    
+	}
+	
+	add_feat_count($feat_hash, $str);
+	$res .= " " . $str;
+	push(@$vectors_ptr, $res);
+    }
+	
+    return $word_num;
+}
+
+
+##### keep the entries when the cnt >= thres
+### return the number of kept_num
+###
+sub read_voc {
+    my ($fp, $thres, $hash) = @_;
+
+    my $kept_num = 0;
+    my $total_num = 0;
+
+    while(<$fp>){
+	chomp;
+	if(/^\s*$/){
+	    next;
+	}
+	
+	my $line = $_;
+	$total_num ++;
+	my @parts = split(/\s+/, $line);
+
+	my $token = $parts[0];
+	my $cnt = $parts[1];
+	if($cnt >= $thres){
+	    $hash->{$token} = $cnt;
+	    $kept_num ++;
+	}
+    }
+
+    print STDERR "Out of $total_num entries, $kept_num are kept\n";
+
+    return $kept_num;
+}
+
+sub add_feat_count {
+    my ($feat_hash, $str) = @_;
+    
+    my @parts = split(/\s+/, $str);
+    my $part_num = scalar @parts;
+
+    for(my $i=0; $i<$part_num; $i+=2){
+	my $part = $parts[$i];
+
+	if(defined($feat_hash->{$part})){
+	    $feat_hash->{$part} ++;
+	}else{
+	    $feat_hash->{$part} = 1;
+	}
+    }
+}
+
+### return the number of words in the sent.
+sub split_into_wt_pairs {
+    my ($line, $word_ptr, $tag_ptr) = @_;
+
+    @$word_ptr = ();
+    @$tag_ptr = ();
+
+    my @parts = split(/\s+/, $line);
+    foreach my $part (@parts){
+        if($part =~ /^(.+)\/([^\/]+)$/){
+            my $w = $1;
+            my $t = $2;
+            push(@$word_ptr, $w);
+            push(@$tag_ptr, $t);
+        }else{
+            print STDERR "wrong format: +$part+\n";
+	    return -1;
+        }
+    }
+
+    my $num = scalar @$word_ptr;
+    return $num;
+}

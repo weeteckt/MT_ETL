@@ -1,0 +1,57 @@
+#!/usr/bin/env perl
+
+
+## created on 1/21/08
+
+## Purpose: return the number of featurs whose chi_square score >= thres
+
+## to run:
+##    cat feat_list | $0 thres 
+
+## the format of feat_list is:
+##  feat_name score ...
+
+
+use strict;
+
+main();
+
+1;
+
+
+#########################
+sub main {
+    my $cnt = 0;
+
+    if(@ARGV != 1){
+	die "usage: cat feat_list | $0 thres\n";
+    }
+
+    my $thres = $ARGV[0];
+
+    print STDERR "thres=$thres\n";
+
+    while(<STDIN>){
+	chomp;
+	if(/^\s*$/){
+	    next;
+	}
+
+	my @parts = split(/\s+/);
+	if(scalar @parts < 2){
+	    print STDERR "wrong format: +$_+\n";
+	    next;
+	}
+
+	my $score = $parts[1];
+	if($score >= $thres){
+	    $cnt ++;
+	}else{
+	    print STDERR "below thres: +$_+\n";
+	    last;
+	}
+    }
+
+    print STDERR "cnt=$cnt\n";
+}
+

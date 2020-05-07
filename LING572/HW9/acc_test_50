@@ -1,0 +1,13 @@
+
+
+Confusion matrix for the test2.txt data:
+row is the truth, column is the system output
+
+	guns		mideast		misc		
+guns	80		  20		  0		  
+mideast	13		  87		  0		  
+misc	30		  70		  0		  
+
+test2.txt accuracy=0.556666666666667
+
+
